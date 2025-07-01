@@ -24,7 +24,7 @@ const Contact = ({ translations, currentLang }) => {
         };
 
         try {
-            const response = await fetch("https://alcofree-apis.onrender.com/send-email", {
+            const response = await fetch("https://d-52-api.onrender.com/send-email", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
