@@ -579,7 +579,7 @@ const UrgencyAndVideoSection = () => {
                             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl border border-white/10">
                                 <iframe
                                     className="w-full h-full"
-                                    src="https://www.youtube.com/embed/OMZullz8DCc?rel=0&modestbranding=1&showinfo=0"
+                                    src="https://www.youtube.com/embed/A229dI97w_Q?rel=0&modestbranding=1&showinfo=0"
                                     title="D-52 - Natural Diabetes Support Formula"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -701,9 +701,3 @@ const Home = ({ currentLang, translations }) => {
     };
 
 export default Home;
-
-
-
-
-
-//

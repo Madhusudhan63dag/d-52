@@ -13,10 +13,10 @@ const Footer = ({ currentLang, translations }) => {
                     </a>
                     <p className="mt-4 text-gray-400">{translations[currentLang].nav.natural} </p>
                     <div className="flex space-x-4 mt-4">
-                        <a href="https://www.facebook.com/dralcofree" className="text-gray-400 hover:text-white">
+                        <a href="https://www.facebook.com/profile.php?id=61577594376409" className="text-gray-400 hover:text-white">
                             <Facebook size={20} />
                         </a>
-                        <a href="https://www.instagram.com/dr.alcofree" className="text-gray-400 hover:text-white">
+                        <a href="https://www.instagram.com/_d52_sugarfree/?fbclid=IwY2xjawLQoUhleHRuA2FlbQIxMQBicmlkETFaMDBzcVdaUDNCbW1qU0NpAR4vZBEyWn7RHo095vRpkm0NcjfC_DEGoIz8FJQap_LXRaeHqeIJGbjfGIUGdg_aem_BoiTZbs5GDFrSObQx8T5Yw" className="text-gray-400 hover:text-white">
                             <Instagram size={20} />
                         </a>
                     </div>
