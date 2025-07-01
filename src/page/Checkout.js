@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // API base URL that works in both development and production environments
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://alcofree-apis.onrender.com'
-    : 'https://alcofree-apis.onrender.com';
+    ? 'https://d-52-api.onrender.com'
+    : 'https://d-52-api.onrender.com';
 
 const COUNTRY_CURRENCY_MAP = {
     'India': { currency: 'INR', symbol: '₹', rate: 1, basePrice: 3990 },
