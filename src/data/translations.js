@@ -1,10 +1,9 @@
 import { Shield, Leaf, Brain, Hand } from 'lucide-react';
-import about from '../assets/about.webp';
-import one from '../assets/review/1.webp';
-import two from '../assets/review/2.webp';
-import three from '../assets/review/3.webp';
-import four from '../assets/review/4.webp';
-
+import one from '../assets/1.webp'
+import two from '../assets/2.webp'
+import three from '../assets/3.webp'
+import four from '../assets/4.webp'
+import five from '../assets/5.webp'
 
 export const translations = {
   en: {
@@ -13,7 +12,7 @@ export const translations = {
       homelink: '/',
       aboutUs: 'About Us',
       aboutUslink: '/about',
-      product: 'Shop Dr.Alco Free',
+      product: 'Shop D-52',
       productlink: '/product',
       privacyPolicy: 'Privacy Policy',
       privacyPolicylink: '/privacy',
@@ -25,121 +24,121 @@ export const translations = {
       contactUslink: '/contact',
       terms: "Terms & Conditions",
       natural: "100% Natural",
-      lastone: "© 2025. All Rights Reserved By Dr. Alcofree",
+      lastone: "© 2025. All Rights Reserved By D-52",
       termslink: '/terms',
       // blog: 'Blog',
       // bloglink: '/blog',
     },
     hero: {
-      title: 'Natural Support for Alcohol Recovery',
-      description: 'Empower your journey to sobriety with safe, herbal solutions'
+      title: 'Natural Support for Diabetes Management',
+      description: 'Empower your health journey with safe, herbal diabetes care solutions'
     },
     about: {
       title: 'About Us',
-      content1: `At Dr. Alcofree, our mission is to support individuals on their journey to overcome alcohol dependency through natural, effective, and holistic solutions. Our formulas are thoughtfully created to reduce cravings, detoxify the body, and support mental clarity. We use premium herbs and essential nutrients to gently aid recovery without harsh chemicals or side effects.`,
-      content2: `We believe in wellness without judgment. Dr. Alcofree is committed to offering safe, science-backed alternatives that restore balance in both body and mind. Whether you're beginning your recovery or maintaining long-term sobriety, our products are here to help you thrive with confidence.`,
-      question1: `Why Choose Dr. Alcofree for Alcohol Recovery?`,
-      question2: "Craving Control:",
-      answer1: `Our supplement helps reduce alcohol cravings by balancing brain chemistry, specifically targeting neurotransmitters disrupted by alcohol use. This helps you feel more in control, especially during early recovery.`,
-      question3: "Liver Detox & Support:",
-      answer2: `Dr. Alcofree includes liver-supportive herbs like milk thistle and dandelion root that aid in cleansing the liver and restoring its natural function, promoting faster healing from alcohol’s impact.`,
-      question4: "Safe and Natural:",
-      answer3: `Made from high-quality herbal ingredients and essential nutrients, our formula is safe for daily use and free from harmful chemicals. It supports overall wellness while aiding recovery.`,
+      content1: `At D-52 Diabetes Care, our mission is to support individuals in managing diabetes naturally and effectively. Our herbal formulation is crafted to help regulate blood sugar levels, improve energy, and support overall wellness without side effects. Each bottle contains powerful plant-based extracts, designed for easy, daily use.`,
+      content2: `We believe in natural wellness without compromise. D-52 is committed to delivering safe, science-informed, and AYUSH-certified alternatives to support your body in maintaining balance and vitality. Whether you're newly diagnosed or managing long-term diabetes, D-52 is your reliable companion on the journey to better health.`,
+      question1: `Why Choose D-52 for Diabetes Care?`,
+      question2: "Blood Sugar Balance:",
+      answer1: `Our herbal drops are designed to help regulate blood glucose naturally by supporting insulin sensitivity and metabolic function. This helps stabilize your energy and reduce fluctuations throughout the day.`,
+      question3: "Liver & Digestive Support:",
+      answer2: `D-52 includes liver-friendly herbs that not only aid in detoxification but also support digestion—both critical factors for effective diabetes control.`,
+      question4: "Simple & Safe to Use:",
+      answer3: `With just 5 drops in water before meals—morning and evening—D-52 is easy to use daily. The formula is free from chemicals and additives, making it a gentle, natural solution to long-term diabetes care.`,
     },
     product: {
       title: 'Product',
-      subtitle: 'The Natural Way to Reduce Alcohol Dependence',
-      title2: `Discover the Power of Nature: Dr. Alcofree Benefits`,
-      content1: `Breaking free from alcohol isn’t just about willpower—it’s about giving your body and mind the support they need. Alcohol affects multiple systems, from the brain to the liver. Dr. Alcofree provides comprehensive support to ease this transition.`,
-      content2: `Our supplement helps reduce cravings, improves liver function, and promotes emotional balance. It is ideal for anyone who wants to cut down or completely quit alcohol, using nature’s healing touch instead of synthetic drugs.`,
-      content3: `Each capsule contains a potent blend of herbs and vitamins known for their detoxifying and calming properties. Dr. Alcofree makes recovery safer, more natural, and more sustainable—for a life lived fully and freely.`,
+      subtitle: 'Natural Herbal Drops for Diabetes Management',
+      title2: `How D-52 Helps You Live Healthier with Diabetes`,
+      content1: `Managing diabetes requires more than just avoiding sugar—your body needs real support to stay balanced. D-52 helps your system regain control by supporting glucose metabolism, liver function, and overall energy levels.`,
+      content2: `These drops are ideal for anyone looking to manage blood sugar naturally, reduce fatigue, and improve digestion. D-52 works with your body—not against it—to gently promote stability and strength from within.`,
+      content3: `Each pack contains 5 mini 30 ml bottles. Just add 5 drops in a glass of water before breakfast and dinner. That’s it. No complicated routines or pills—just a simple herbal solution for better blood sugar control.`,
     },
     faq: {
       title: "FAQ's",
       faqData: [
         {
-          question: "What is Dr. Alcofree?",
-          answer: "Dr. Alcofree is a herbal supplement designed to help reduce or eliminate alcohol cravings. It supports detoxification, improves mental clarity, and aids liver recovery using safe, natural ingredients."
+          question: "What is D-52 Diabetes Care?",
+          answer: "D-52 is a natural herbal drop formulation designed to help manage blood sugar levels, support digestion, and boost overall energy using traditional Ayurvedic ingredients."
         },
         {
-          question: "How does Dr. Alcofree reduce alcohol cravings?",
-          answer: "The formula helps regulate neurotransmitters that control cravings and stress. This helps manage the urge to drink while promoting emotional stability and reducing anxiety associated with withdrawal."
+          question: "How do I use D-52?",
+          answer: "Add 5 drops to a glass of water and drink it before meals—once in the morning and once in the evening. It’s that simple."
         },
         {
-          question: "Is Dr. Alcofree safe for long-term use?",
-          answer: "Yes. Dr. Alcofree is made with natural herbs and nutrients that are safe for extended use. It contains no addictive ingredients or harmful chemicals."
+          question: "Is D-52 safe for long-term use?",
+          answer: "Yes. D-52 is made with safe, herbal ingredients and contains no harmful chemicals or preservatives. It is certified by the AYUSH department for quality and safety."
         },
         {
-          question: "Can Dr. Alcofree help with liver detox?",
-          answer: "Absolutely. Ingredients like milk thistle and dandelion root are known to support liver function and aid in detoxifying the body from alcohol’s effects."
+          question: "What are the benefits of using D-52?",
+          answer: "It helps maintain healthy blood glucose levels, supports liver and digestive function, and reduces fatigue often associated with diabetes."
         },
         {
-          question: "Who can benefit from Dr. Alcofree?",
-          answer: "Anyone looking to reduce or quit alcohol can benefit—from those in early recovery stages to individuals maintaining long-term sobriety. It’s also suitable for people aiming to improve liver health and emotional well-being."
+          question: "Who should use D-52?",
+          answer: "Anyone managing diabetes or prediabetes, or those looking for natural metabolic support, can benefit from using D-52 daily."
         }
       ]
     },
     testimonials: {
-      title: 'Real Recovery Stories',
+      title: 'Real Results from Real People',
       testimonial: [
         {
           image: one,
-          text: "Dr. AlcoFree helped me gain control over my drinking habits. After years of struggling, this product helped reduce my cravings and supported my liver health. I feel more energetic and focused than I have in years.",
-          name: 'RAHUL VERMA',
-          role: 'Marketing Executive',
+          text: "D-52 has become an essential part of my daily routine. My sugar levels have stabilized, and I feel more energetic throughout the day. The simplicity of just 5 drops before meals is perfect.",
+          name: 'RAJESH KUMAR',
+          role: 'School Principal',
           rating: 5,
-          location: 'Maharashtra, Pune',
+          location: 'Bangalore, Karnataka',
           beforeAfter: [
-            'Cravings reduced by 80%',
-            'Better focus at work',
-            'Improved sleep quality',
-            'Liver enzymes stabilized'
+            'More stable glucose readings',
+            'Increased daily energy',
+            'No bloating or digestive issues',
+            'Liver markers improved'
           ]
         },
         {
           image: two,
-          text: "As someone in recovery, I was always looking for a natural way to stay on track. Dr. AlcoFree supports my body and keeps my mind focused. It’s part of my daily wellness routine now.",
-          name: 'NITESH GUPTA',
-          role: 'Fitness Trainer',
+          text: "I was looking for a natural way to manage my blood sugar. D-52 has helped me feel more balanced and alert. It fits easily into my lifestyle and doesn’t feel like a burden.",
+          name: 'POONAM SINGH',
+          role: 'Yoga Instructor',
           rating: 5,
-          location: 'Delhi NCR',
+          location: 'Lucknow, Uttar Pradesh',
           beforeAfter: [
-            'No relapses in 6 months',
-            'Stronger liver function',
-            'Cravings under control',
-            'Increased workout stamina'
+            'Better fasting sugar levels',
+            'Improved mental focus',
+            'Reduced cravings',
+            'Feel lighter after meals'
           ]
         },
         {
           image: three,
-          text: "I started using Dr. AlcoFree during my transition to a healthier lifestyle. It not only reduced my urge to drink but also improved my digestion and energy levels. Highly recommended.",
-          name: 'SURESH REDDY',
-          role: 'Software Engineer',
-          rating: 5,
-          location: 'Hyderabad, Telangana',
+          text: "My doctor suggested I try natural alternatives. D-52 supported my digestion and gave me a boost of energy. It’s subtle but effective.",
+          name: 'SURESH IYER',
+          role: 'Accountant',
+          rating: 4.5,
+          location: 'Chennai, Tamil Nadu',
           beforeAfter: [
-            'Reduced weekend cravings',
-            'Improved liver profile',
-            'More active mornings',
-            'Boosted confidence'
+            'Reduced sugar spikes',
+            'Better post-meal digestion',
+            'Improved mood',
+            'Gentle on the stomach'
           ]
         },
         {
           image: four,
-          text: "Dr. AlcoFree helped me during a crucial detox phase. It supported my liver and kept me mentally calm without any side effects. It’s truly a game-changer for anyone serious about quitting alcohol.",
-          name: 'VIKRAM DESAI',
-          role: 'Entrepreneur',
+          text: "I didn’t expect much from herbal drops, but D-52 proved me wrong. I feel much better overall and my blood reports look more promising now.",
+          name: 'ALKA MEHRA',
+          role: 'Retired Banker',
           rating: 5,
-          location: 'Mumbai, Maharashtra',
+          location: 'Delhi NCR',
           beforeAfter: [
-            'Eased alcohol withdrawal',
-            'Steady mental clarity',
-            'No binge episodes',
-            'Detox felt smoother'
+            'Lower HbA1c levels',
+            'Fewer sugar crashes',
+            'Improved sleep patterns',
+            'More physical activity'
           ]
         }
       ]      
-    },    
+    },       
     contact: {
       title: 'Contact Us',
       address: 'India',
@@ -156,28 +155,22 @@ export const translations = {
       pageinmessage: "Write you present condition...",
       pagesubbutton: "Send Message",
     },
-    aboutpage: {
-      title: "About Us",
-      img: about,
-    },
-    productpage: {
-      title: "Natural Supplement to Reduce Alcohol Cravings",
-      secondtitle: "Qty",
-      content: `Dr. Alcofree is a powerful herbal supplement designed to support individuals in reducing or quitting alcohol. Its unique formula helps curb cravings, supports liver detox, and promotes emotional well-being. Made with safe, natural ingredients like milk thistle, dandelion root, and essential B-vitamins, Dr. Alcofree restores balance in the body and mind. Whether you're taking the first step toward sobriety or maintaining your recovery journey, this supplement provides daily support for a healthier, more focused, and alcohol-free lifestyle.`,
-      buy: "Buy Now",
-    },    
+    // aboutpage: {
+    //   title: "About Us",
+    //   img: about,
+    // },    
     returnpage: {
       title: 'Return Policy',
       sectitle: 'Return Policy',
-      content1: `Dr.Alcofree is committed to helping millions of people become fitter, healthier, and happier; we stand behind the quality of our products with a 15-day return policy. If you don't believe our products are improving the quality of your life, we offer a refund within 15 days of receipt of your order, less the shipping cost. Any remaining product and original packaging must be returned to Dr.Alcofree for a refund.`,
+      content1: `D-52 is committed to helping millions of people become fitter, healthier, and happier; we stand behind the quality of our products with a 15-day return policy. If you don't believe our products are improving the quality of your life, we offer a refund within 15 days of receipt of your order, less the shipping cost. Any remaining product and original packaging must be returned to D-52 for a refund.`,
       content2: `Eligibility – Your purchase is eligible for a return if it meets the criteria below:`,
-      content3: `Refunds require returning used or unused products packaging of Dr.Alcofree Products.`,
+      content3: `Refunds require returning used or unused product packaging of D-52 Products.`,
       content4: `Return Process has to be done by the customer only.`,
-      content5: `The product has to reach the specified address on the website`,
-      content6: `The product has to arrive within 15 days of the Date of purchasing the product`,
+      content5: `The product has to reach the specified address on the website.`,
+      content6: `The product has to arrive within 15 days of the date of purchasing the product.`,
       content7: `We will not accept damaged products.`,
-      content8: `Amount will be added to the actual source of payment done by the customer within 10 working days`,
-    },
+      content8: `Amount will be added to the original source of payment done by the customer within 10 working days.`,
+    },    
     sections: [
       {
         title: "Information We Collect",
@@ -204,7 +197,7 @@ export const translations = {
           title: "Information We Collect",
           content: [
             {
-              text: "This Privacy Policy describes how Dr.Alcofree uses, and discloses your information when you use our website https://www.dralcofree.com/"
+              text: "This Privacy Policy describes how D-52 uses and discloses your information when you use our website https://www.d52care.com/"
             },
             {
               subtitle: "Personal Information:",
@@ -250,7 +243,7 @@ export const translations = {
           content: "We may update this Privacy Policy from time to time. We will post any changes on the Site. We encourage you to review this Privacy Policy periodically for the latest information on our privacy practices."
         }
       ]
-    },
+    },    
     checkout: {
       title: "Checkout",
       sectitle: "Billing Details",
@@ -300,40 +293,46 @@ export const translations = {
       title: "Terms & Conditions",
       sections: [
         {
-          title: "Welcome to Dr. Alcofree!",
-          content: "These terms and conditions outline the rules and regulations for the use of Dr. Alcofree Website, located at https://www.dralcofree.com, A natural herbal supplement for alcohol recovery support. By accessing this website we assume you accept these terms and conditions. Do not continue to use Dr. Alcofree if you do not agree to take all of the terms and conditions stated on this page."
+          title: "Welcome to D-52!",
+          content:
+            "These terms and conditions outline the rules and regulations for the use of the D-52 website, located at https://www.d52care.com, a natural herbal supplement for diabetes wellness support. By accessing this website we assume you accept these terms and conditions. Do not continue to use D-52 if you do not agree to take all of the terms and conditions stated on this page."
         },
         {
           title: "Definitions",
-          content: "The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice, and all Agreements: \"Client\", \"You\" and \"You're\" refers to you, the person who logs on to this website and is compliant with the Company's terms and conditions. \"The Company\", \"Ourselves\", \"We\", \"Our\" and \"Us\", refers to our Company. \"Party\", \"Parties\", or \"Us\", refers to both the Client and ourselves. All terms refer to the offer, acceptance, and consideration of payment necessary to undertake the process of our assistance to the Client most appropriately for the express purpose of meeting the Client's needs in respect of the provision of the Company's stated services, by and subject to, prevailing law of in. Any use of the above terminology or other words in the singular, plural, capitalization, and/or he/she or they, are taken as interchangeable and therefore as referring to the same."
+          content:
+            "The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice, and all Agreements: \"Client\", \"You\" and \"Your\" refers to you, the person who logs on to this website and is compliant with the Company's terms and conditions. \"The Company\", \"Ourselves\", \"We\", \"Our\" and \"Us\" refers to our Company. \"Party\", \"Parties\", or \"Us\" refers to both the Client and ourselves. All terms refer to the offer, acceptance, and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services, by and subject to, prevailing laws. Any use of the above terminology or other words in the singular, plural, capitalization, and/or he/she or they, are taken as interchangeable and therefore as referring to the same."
         },
         {
           title: "Cookies",
-          content: "We employ the use of cookies. By accessing Dr. Alcofree, you agree to use cookies in agreement with Dr. Alcofree's Privacy Policy. Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies."
+          content:
+            "We employ the use of cookies. By accessing D-52, you agree to use cookies in agreement with D-52's Privacy Policy. Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies."
         },
         {
           title: "License",
-          content: "Unless otherwise stated, Dr. Alcofree and/or its licensors own the intellectual property rights for all material on Dr. Alcofree. All intellectual property rights are reserved. You may access this from Dr. Alcofree for your personal use subject to restrictions set in these terms and conditions."
+          content:
+            "Unless otherwise stated, D-52 and/or its licensors own the intellectual property rights for all material on D-52. All intellectual property rights are reserved. You may access this from D-52 for your own personal use subject to restrictions set in these terms and conditions."
         },
         {
           title: "You must not:",
           content: [
-            "Republish material from Dr. Alcofree",
-            "Sell, rent, or sub-license material from Dr. Alcofree",
-            "Reproduce, duplicate, or copy material from Dr. Alcofree",
-            "Redistribute content from Dr. Alcofree"
+            "Republish material from D-52",
+            "Sell, rent, or sub-license material from D-52",
+            "Reproduce, duplicate, or copy material from D-52",
+            "Redistribute content from D-52"
           ]
         },
         {
           title: "User Comments",
-          content: "Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Dr. Alcofree does not filter, edit, publish, or review Comments before their presence on the website. Comments do not reflect the views and opinions of Dr. Alcofree, its agents, and/or affiliates. Comments reflect the views and opinions of the person who posts their views and opinions. To the extent permitted by applicable laws, Dr. Alcofree shall not be liable for the Comments or any liability, damages, or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website."
+          content:
+            "Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. D-52 does not filter, edit, publish, or review Comments prior to their appearance on the website. Comments do not reflect the views and opinions of D-52, its agents, and/or affiliates. Comments reflect the views and opinions of the person who posts them. To the extent permitted by applicable laws, D-52 shall not be liable for the Comments or any liability, damages, or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website."
         },
         {
           title: "Content Liability",
-          content: "We shall not be held responsible for any content that appears on your Website. You agree to protect and defend us against all claims that are arising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third-party rights."
+          content:
+            "We shall not be held responsible for any content that appears on your Website. You agree to protect and defend us against all claims that are arising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene, or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third-party rights."
         }
       ]
-    },
+    }    
     }
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/logo.webp';
+// import logo from '../assets/logo.webp';
 
 const MinimalNavbar = () => {
     return (
@@ -9,7 +9,7 @@ const MinimalNavbar = () => {
                     {/* Centered Logo and Product Name */}
                     <div className="flex items-center space-x-4">
                         <img 
-                            src={logo} 
+                            // src={logo} 
                             alt="Dr. Joints Logo" 
                             className="h-10 sm:h-14 md:h-18 w-auto object-contain" 
                         />

@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import banner1 from '../assets/imagess/banner1.webp';  // Update path as needed
-import banner2 from '../assets/imagess/banner1.webp';  // Update path as needed
 import banner1Mobile from '../assets/imagess/banner1.webp';  // Add mobile images
-import banner2Mobile from '../assets/imagess/banner2.webp';  // Add mobile images
-import product from '../assets/imagess/7.webp';
+import banner3 from '../assets/imagess/banner3.webp'
+import product from '../assets/imagess/3.webp';
 import FAQ from '../components/FAQ';
 import one from '../assets/t_one.webp';
 import two from '../assets/t_two.webp';
 import three from '../assets/t_three.webp';
 import four from '../assets/t_four.webp';
+import buy from '../assets/buy.png'
+import stamp from '../assets/imagess/stamp.webp';
 
 
 const logoCarouselStyles = `
@@ -47,27 +48,16 @@ if (typeof document !== 'undefined') {
 }
 
 const Hero = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const timerRef = useRef(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    const desktopImages = [
-        { url: banner1, alt: "Dr. Joints Pain Relief oil." },
-        { url: banner2, alt: "Dr. Joints Muscles Pain Relief oils." }
-    ];
+    const desktopImage = banner1;
+    const mobileImage = banner1Mobile;
     
-    const mobileImages = [
-        { url: banner1Mobile, alt: "Dr. Joints Pain Relief oil - mobile view." },
-        { url: banner2Mobile, alt: "Dr. Joints Muscles Pain Relief oils - mobile view." }
-    ];
-    
-    const images = isMobile ? mobileImages : desktopImages;
+    const currentImage = isMobile ? mobileImage : desktopImage;
     
     useEffect(() => {
-        // Auto slide functionality
-        timerRef.current = setInterval(() => {
-            setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
-        }, 5000);
+        setIsLoaded(true);
         
         // Handle screen resize
         const handleResize = () => {
@@ -77,27 +67,88 @@ const Hero = () => {
         window.addEventListener('resize', handleResize);
         
         return () => {
-            clearInterval(timerRef.current);
             window.removeEventListener('resize', handleResize);
         };
-    }, [images.length, isMobile]);
+    }, [isMobile]);
 
     return (
-        <div className="w-full">
-            <div className="relative w-full h-auto overflow-hidden">
-                {images.map((image, index) => (
-                    <div
-                        key={index}
-                        className={`w-full transition-opacity duration-1000 ease-in-out
-                        ${index === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
-                    >
-                        <img
-                            src={image.url}
-                            alt={image.alt}
-                            className="w-full h-auto object-cover"
-                        />
+        <div className="w-full relative bg-gradient-to-b from-sky-50 to-white">
+            {/* Enhanced Styles */}
+            <style jsx>{`
+                @keyframes slideInFromBottom {
+                    0% { transform: translateY(50px); opacity: 0; }
+                    100% { transform: translateY(0); opacity: 1; }
+                }
+                
+                @keyframes fadeInScale {
+                    0% { transform: scale(0.95); opacity: 0; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+                
+                @keyframes shimmerSlide {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                }
+                
+                .slide-in-bottom { animation: slideInFromBottom 0.8s ease-out; }
+                .fade-in-scale { animation: fadeInScale 0.6s ease-out; }
+                
+                .hero-card {
+                    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,249,255,0.8));
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(14, 165, 233, 0.2);
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                
+                .hero-card:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+                    border-color: rgba(14, 165, 233, 0.4);
+                }
+                
+                .image-container {
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 1rem;
+                }
+                
+                .image-shimmer::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.2), transparent);
+                    animation: shimmerSlide 2s infinite;
+                    z-index: 1;
+                }
+            `}</style>
+
+            {/* Background Decorative Elements */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute top-20 left-10 w-32 h-32 bg-sky-200/30 rounded-full blur-2xl"></div>
+                <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-200/30 rounded-full blur-2xl"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-sky-100/20 to-blue-100/20 rounded-full blur-3xl"></div>
+            </div>
+
+            <div className="relative">
+                {/* Hero Content Container */}
+                <div className="">
+                    {/* Hero Card */}
+                    <div className={`hero-card overflow-hidden ${isLoaded ? 'fade-in-scale' : 'opacity-0'}`}>
+                        {/* Single Banner Image */}
+                        <div className="relative w-full h-auto">
+                            <div className="w-full image-container image-shimmer">
+                                <img
+                                    src={currentImage}
+                                    alt="D-52"
+                                    className="w-full h-auto object-cover transition-transform duration-700"
+                                />
+                            </div>
+                        </div>
                     </div>
-                ))}
+                </div>
             </div>
         </div>
     );
@@ -105,12 +156,10 @@ const Hero = () => {
 
 const ProductSection = () => {
     return (
-        <div className="w-full bg-gradient-to-b from-white to-gray-50 mb-10">
-            <h2 className="text-4xl font-bold text-center text-green-800 mb-4">Dr. Alcofree Herbal Support</h2>
-            <p className="text-center text-gray-600 mb-12">Your Natural Companion for an Alcohol-Free Life</p>
-
+        <div className="w-full">
             <div className="w-full">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center items-center mx-auto">
+                <img src={stamp} alt="Stamp" className="w-screen h-auto" />
+                {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center items-center mx-auto">
                     <div>
                         <img src={one} alt="Customer Trusted Brand 1" className="max-w-full h-auto" />
                     </div>
@@ -123,7 +172,7 @@ const ProductSection = () => {
                     <div>
                         <img src={four} alt="Customer Trusted Brand 4" className="w-[8.5rem] h-auto" />
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
@@ -131,36 +180,173 @@ const ProductSection = () => {
 
 const Product = ({ currentLang, translations }) => {
     const productRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const [activeFeature, setActiveFeature] = useState(0);
+
+    const features = [
+        {
+            title: "100% Natural Formula",
+            description: "Made with pure herbal extracts and ayurvedic ingredients",
+            color: "from-green-500 to-emerald-600"
+        },
+        {
+            title: "Scientifically Proven",
+            description: "Clinically tested and research-backed effectiveness",
+            color: "from-blue-500 to-cyan-600"
+        },
+        {
+            title: "Safe & Gentle",
+            description: "No harmful side effects, suitable for long-term use",
+            color: "from-purple-500 to-indigo-600"
+        },
+        {
+            title: "Fast Results",
+            description: "Notice improvements within the first few weeks",
+            color: "from-orange-500 to-red-600"
+        }
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveFeature(prev => (prev + 1) % features.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <div ref={productRef} className="min-h-screen relative">
-            {/* Rest of the Product section */}
-            <div className="p-8">
-                <div className="text-center mb-8">
-                    <h1 className="text-blue-900 text-4xl font-bold mb-4">{translations[currentLang].product.title}</h1>
-                    <h2 className="text-amber-800 text-2xl font-semibold">{translations[currentLang].product.subtitle}</h2>
+        <div ref={productRef} className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 py-20 overflow-hidden">
+            {/* Background Decorative Elements */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-green-200/30 to-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-purple-200/30 to-pink-200/30 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-100/20 to-emerald-100/20 rounded-full blur-3xl"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {/* Enhanced Header Section */}
+                <div className="text-center mb-16">
+                    
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6">
+                        <span className="bg-gradient-to-r from-green-700 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
+                            {translations[currentLang]?.product?.title || "D-52"}
+                        </span>
+                    </h1>
+                    
+                    <h2 className="text-2xl md:text-3xl font-semibold text-amber-700 mb-6">
+                        {translations[currentLang]?.product?.subtitle || "Your Natural Path to Freedom"}
+                    </h2>
                 </div>
 
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                {/* Main Product Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+                    {/* Product Image Side */}
                     <div className="relative">
-                        <img
-                            src={product}
-                            alt="Dr. Joints Pain Relief Oil Product"
-                            className="w-full h-auto"
-                        />
+                        <div 
+                            className="relative group cursor-pointer"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            {/* Floating Background Card */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-white via-green-50 to-blue-50 rounded-3xl shadow-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-green-50 rounded-3xl shadow-xl transform -rotate-2 group-hover:-rotate-3 transition-transform duration-500"></div>
+                            
+                            {/* Main Product Image */}
+                            <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 overflow-hidden">
+                                {/* Shimmer Effect */}
+                                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer group-hover:translate-x-full transition-transform duration-1000"></div>
+                                
+                                <img
+                                    src={product}
+                                    alt="D-52 - Natural Diabetes Support Formula"
+                                    className={`w-full h-auto transform transition-all duration-500 ${isHovered ? 'scale-105 rotate-2' : 'scale-100'}`}
+                                />
+                                
+                                {/* Product Badge */}
+                                <div className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full shadow-lg">
+                                    <span className="font-bold text-sm">✨ Premium Quality</span>
+                                </div>
+                                
+                                {/* Trust Badges */}
+                                <div className="absolute bottom-4 left-4 flex space-x-2">
+                                    <div className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">FDA Approved</div>
+                                    <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">100% Natural</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="space-y-6 pr-4">
-                        <h1 className="text-gray-800 font-bold text-2xl">{translations[currentLang].product.title2}</h1>
-                        <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content1}</p>
-                        <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content2}</p>
-                        <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content3}</p>
-                        <button className="px-8 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
-                            <a href="/product">Buy Now</a>
-                        </button>
+                    {/* Content Side */}
+                    <div className="space-y-8">
+                        <div className="space-y-6">
+                            <h3 className="text-3xl font-bold text-gray-800 leading-tight">
+                                {translations[currentLang]?.product?.title2 || "Revolutionary Natural Formula for Diabetes Support"}
+                            </h3>
+                            
+                            <div className="space-y-4 text-gray-600 leading-relaxed">
+                                <p className="text-lg">
+                                    {translations[currentLang]?.product?.content1 || "D-52 combines ancient Ayurvedic wisdom with modern scientific research to create a powerful, natural solution for diabetes support."}
+                                </p>
+                                <p className="text-lg">
+                                    {translations[currentLang]?.product?.content2 || "Our carefully selected herbal ingredients work synergistically to reduce cravings, support liver health, and restore your body's natural balance."}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Price Section */}
+                        {/* <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border border-green-200">
+                            <div className="flex items-center justify-between mb-4">
+                                <div>
+                                    <div className="text-3xl font-bold text-green-700">₹3,990</div>
+                                    <div className="text-lg text-gray-500 line-through">₹6,990</div>
+                                </div>
+                                <div className="bg-red-500 text-white px-4 py-2 rounded-full font-bold">
+                                    Save 43%
+                                </div>
+                            </div>
+                            <div className="text-sm text-gray-600 mb-4">🚚 Free shipping | 💰 15-day money-back guarantee</div>
+                        </div> */}
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <a href="/product" className="flex-1">
+                                <button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-8 rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                                    Order Now - Start Your Journey
+                                </button>
+                            </a>
+                            {/* <button className="flex-1 border-2 border-green-500 text-green-600 font-semibold py-4 px-8 rounded-xl hover:bg-green-500 hover:text-white transition-all duration-300">
+                                📞 Call for Support
+                            </button> */}
+                        </div>
+
+                        {/* Trust Indicators */}
+                        <div className="flex items-center justify-center space-x-8 pt-6 border-t border-gray-200">
+                            <div className="text-center">
+                                <div className="text-2xl font-bold text-green-600">10,000+</div>
+                                <div className="text-sm text-gray-600">Happy Customers</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-2xl font-bold text-blue-600">4.8/5</div>
+                                <div className="text-sm text-gray-600">Customer Rating</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-2xl font-bold text-purple-600">95%</div>
+                                <div className="text-sm text-gray-600">Success Rate</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            {/* Custom Styles */}
+            <style jsx>{`
+                @keyframes shimmer {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                }
+                .animate-shimmer {
+                    animation: shimmer 2s infinite;
+                }
+            `}</style>
         </div>
     );
 };
@@ -169,7 +355,7 @@ const Testimonials = ({ currentLang, translations }) => {
     const testimonials = translations[currentLang]?.testimonials?.testimonial || [];
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
-    
+
     // Auto-slide functionality
     useEffect(() => {
         if (!isHovered && testimonials.length > 0) {
@@ -181,8 +367,7 @@ const Testimonials = ({ currentLang, translations }) => {
                     }
                     return nextSlide;
                 });
-            }, 4000); // Change slide every 4 seconds
-            
+            }, 4000);
             return () => clearInterval(interval);
         }
     }, [testimonials.length, isHovered]);
@@ -225,252 +410,116 @@ const Testimonials = ({ currentLang, translations }) => {
         return null;
     }
 
-    return (
-        <div className="bg-gradient-to-b from-orange-50 via-yellow-50 to-green-50 py-20 relative overflow-hidden">
-            {/* Decorative Background Elements */}
-            <div className="absolute inset-0">
-                <div className="absolute top-10 left-10 w-32 h-32 opacity-10">
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-orange-500">
-                        <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="2"/>
-                        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1"/>
-                        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
-                    </svg>
-                </div>
-                <div className="absolute bottom-10 right-10 w-40 h-40 opacity-10">
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-green-500">
-                        <path d="M50 10 L60 40 L90 40 L68 58 L78 88 L50 70 L22 88 L32 58 L10 40 L40 40 Z" fill="currentColor"/>
-                    </svg>
-                </div>
-            </div>
+    // Carousel logic: show 3 cards, center is active
+    const getCarouselTestimonials = () => {
+        if (testimonials.length <= 3) return testimonials;
+        const prev = (currentSlide - 1 + testimonials.length) % testimonials.length;
+        const next = (currentSlide + 1) % testimonials.length;
+        return [testimonials[prev], testimonials[currentSlide], testimonials[next]];
+    };
+    const carouselTestimonials = getCarouselTestimonials();
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    return (
+        <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 py-20 relative overflow-hidden">
+            {/* Decorative Background Elements */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-10 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-2xl"></div>
+                <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-200/20 rounded-full blur-2xl"></div>
+            </div>
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center bg-white rounded-full px-6 py-3 shadow-lg border border-green-200 mb-6">
-                        <span className="text-2xl mr-3">🌱</span>
-                        <span className="text-green-700 font-semibold">Real Journeys, Real Transformation</span>
-                    </div>
-
                     <h2 className="text-5xl font-bold mb-6">
-                        <span className="bg-gradient-to-r from-green-700 via-teal-600 to-emerald-500 bg-clip-text text-transparent">
-                            Sobriety Success Stories
+                        <span className="bg-gradient-to-r from-blue-700 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                            Real Success Stories
                         </span>
                     </h2>
-
-                    <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                        Explore how people from all walks of life have embraced a healthier, alcohol-free lifestyle with natural support from Dr. Alcofree.
-                        <br />
-                        <span className="text-green-700 font-semibold">Start your journey to clarity, balance, and freedom today.</span>
-                    </p>
                 </div>
-
-                {/* Testimonials Grid - Show 3 at a time */}
-                <div 
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                >
-                    {testimonials.slice(currentSlide, currentSlide + 3).concat(
-                        currentSlide + 3 > testimonials.length 
-                            ? testimonials.slice(0, (currentSlide + 3) - testimonials.length)
-                            : []
-                    ).map((testimonial, index) => (
-                        <div key={`${currentSlide}-${index}`} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 p-8 border border-gray-100 relative overflow-hidden group">
-                            {/* Background Pattern */}
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-50 to-blue-50 rounded-full transform translate-x-16 -translate-y-16 opacity-50 group-hover:opacity-70 transition-opacity"></div>
-                            
-                            {/* Content */}
-                            <div className="relative z-10">
-                                {/* Quote Icon and Rating */}
-                                <div className="flex justify-between items-start mb-6">
-                                    <div className="w-14 h-14 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
-                                        <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
-                                        </svg>
-                                    </div>
-                                    
-                                    {/* Star Rating */}
-                                    <div className="flex items-center space-x-1">
-                                        {renderStars(testimonial.rating || 5)}
-                                    </div>
-                                </div>
-                                
-                                {/* Review Text */}
-                                <p className="text-gray-700 text-base leading-relaxed mb-8 italic font-medium">
-                                    "{testimonial.text}"
-                                </p>
-                                
-                                {/* Customer Info */}
-                                <div className="border-t border-gray-100 pt-6">
-                                    <div className="flex items-center justify-between">
-                                        <div>
-                                            <h4 className="font-bold text-gray-900 text-lg">{testimonial.name}</h4>
-                                            <p className="text-sm text-gray-500 font-medium">{testimonial.location}</p>
-                                        </div>
-                                        
-                                        {/* Customer Initial Avatar */}
-                                        <div className="w-14 h-14 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
-                                            <span className="text-white font-bold text-xl">
-                                                {testimonial.name ? testimonial.name.charAt(0).toUpperCase() : "T"}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                {/* Verification Badge */}
-                                <div className="absolute bottom-6 right-6">
-                                    <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1 shadow-sm">
-                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                        </svg>
-                                        <span>Verified</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Navigation Controls */}
-                <div className="flex justify-center items-center space-x-6">
-                    {/* Previous Button */}
+                {/* Carousel Showcase */}
+                <div className="flex items-center justify-center gap-4 mb-12 select-none">
+                    {/* Prev Arrow */}
                     <button 
                         onClick={goToPrevSlide}
-                        className="w-12 h-12 bg-white hover:bg-gray-50 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-200"
+                        className="w-12 h-12 bg-white/80 hover:bg-blue-100 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 border-2 border-blue-200 hover:scale-110"
                     >
-                        <ChevronLeft className="w-6 h-6 text-gray-700" />
+                        <ChevronLeft className="w-7 h-7 text-blue-700" />
                     </button>
-                    
-                    {/* Slide Indicators */}
-                    <div className="flex space-x-2">
-                        {testimonials.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => goToSlide(index)}
-                                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                    index === currentSlide 
-                                        ? 'bg-green-500 scale-125' 
-                                        : 'bg-gray-300 hover:bg-gray-400'
-                                }`}
-                            />
-                        ))}
+                    {/* Cards */}
+                    <div className="flex gap-0 md:gap-8 w-full max-w-3xl justify-center items-center relative">
+                        {carouselTestimonials.map((testimonial, idx) => {
+                            // Center card is active
+                            const isActive = idx === 1;
+                            return (
+                                <div
+                                    key={testimonial.name + testimonial.text}
+                                    className={`relative transition-all duration-500 flex-1 mx-[-1rem] md:mx-0 ${isActive ? 'z-20 scale-105' : 'z-10 scale-95 opacity-70'} `}
+                                    style={{
+                                        boxShadow: isActive ? '0 8px 32px 0 rgba(80,80,200,0.18)' : '0 2px 8px 0 rgba(80,80,200,0.08)',
+                                        filter: isActive ? 'blur(0)' : 'blur(0.5px)',
+                                    }}
+                                >
+                                    <div className={`backdrop-blur-lg bg-white/60 border-2 ${isActive ? 'border-blue-400 shadow-xl' : 'border-blue-100'} rounded-3xl p-8 flex flex-col h-full transition-all duration-500`}> 
+                                        {/* Stars */}
+                                        <div className="flex items-center mb-4">
+                                            {renderStars(testimonial.rating || 5)}
+                                        </div>
+                                        {/* Review Text */}
+                                        <p className="text-gray-800 text-base leading-relaxed mb-6 italic font-medium">
+                                            "{testimonial.text}"
+                                        </p>
+                                        {/* Customer Info */}
+                                        <div className="flex items-center gap-4 mt-auto">
+                                            <div className="w-14 h-14 rounded-full flex items-center justify-center ">
+                                                <span className="text-white font-bold text-xl">
+                                                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full rounded-full object-cover" />
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-blue-900 text-lg">{testimonial.name}</h4>
+                                                <p className="text-sm text-blue-500 font-medium">{testimonial.location}</p>
+                                            </div>
+                                            {/* Verified badge */}
+                                            <div className="ml-auto flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                                <span>Verified</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-
-                    {/* Next Button */}
+                    {/* Next Arrow */}
                     <button 
                         onClick={goToNextSlide}
-                        className="w-12 h-12 bg-white hover:bg-gray-50 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-200"
+                        className="w-12 h-12 bg-white/80 hover:bg-blue-100 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 border-2 border-blue-200 hover:scale-110"
                     >
-                        <ChevronRight className="w-6 h-6 text-gray-700" />
+                        <ChevronRight className="w-7 h-7 text-blue-700" />
                     </button>
                 </div>
-            </div>
-        </div>
-    );
-};
-
-const AmazonSection = () => {
-    return (
-        <div className="bg-gradient-to-br from-orange-50 via-yellow-50 to-orange-100 py-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                        Also Available on <span className="text-orange-600">Amazon</span>
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Shop Dr. Alcofree from your preferred platform. Same authentic product, multiple trusted channels.
-                    </p>
-                </div>
-
-                {/* Amazon Card */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300">
-                        <div className="grid md:grid-cols-2 gap-0">
-                            {/* Amazon Logo Side */}
-                            <div className="bg-gradient-to-br from-orange-500 to-yellow-500 p-12 flex items-center justify-center relative overflow-hidden">
-                                <div className="absolute inset-0 bg-grid-white/[0.1] bg-[size:20px_20px]" />
-                                <div className="relative z-10 text-center">
-                                    <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 mx-auto shadow-lg">
-                                        <svg className="w-12 h-12 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M13.12 2.06L7.58 7.6c-.37.37-.58.88-.58 1.41V19c0 1.1.9 2 2 2h9c.8 0 1.52-.48 1.84-1.21l3.26-7.61C23.94 10.2 22.49 8 20.34 8H14.5l1.76-5.24c.15-.45-.24-.81-.69-.81-.23 0-.45.09-.61.24z"/>
-                                        </svg>
-                                    </div>
-                                    <h3 className="text-3xl font-bold text-white mb-2">Amazon</h3>
-                                    <p className="text-orange-100 text-lg">Trusted Marketplace</p>
-                                </div>
-                            </div>
-
-                            {/* Content Side */}
-                            <div className="p-8">
-                                <h4 className="text-2xl font-bold text-gray-800 mb-6">Why Choose Amazon?</h4>
-                                
-                                <div className="space-y-4 mb-8">
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                                            <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-gray-700 font-medium">Amazon Prime eligible - Fast delivery</span>
-                                    </div>
-                                    
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                                            <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-gray-700 font-medium">Secure payment & buyer protection</span>
-                                    </div>
-                                    
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                                            <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-gray-700 font-medium">Easy returns & customer support</span>
-                                    </div>
-                                    
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                                            <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-gray-700 font-medium">Same authentic Dr. Alcofree product</span>
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col sm:flex-row gap-4">
-                                    <a 
-                                        id="amazon"
-                                        href="https://www.amazon.in/Dr-Alcofree-Natural-Alcohol-Recovery/dp/B0B28KXNL7" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="amazon flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg text-center transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                                    >
-                                        Shop on Amazon
-                                    </a>
-                                    <a 
-                                        href="/product"
-                                        className="flex-1 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold py-3 px-6 rounded-lg text-center transition-all duration-300"
-                                    >
-                                        Shop Direct
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {/* Slide Indicators */}
+                <div className="flex justify-center gap-2 mb-2">
+                    {testimonials.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => goToSlide(index)}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                index === currentSlide 
+                                    ? 'bg-blue-500 scale-125' 
+                                    : 'bg-blue-200 hover:bg-blue-400'
+                            }`}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
     );
 };
 
-const UrgencySection = () => {
+
+const UrgencyAndVideoSection = () => {
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 45, seconds: 30 });
     const [stockCount, setStockCount] = useState(47);
 
@@ -496,216 +545,140 @@ const UrgencySection = () => {
     // Simulate stock decrease
     useEffect(() => {
         const stockTimer = setInterval(() => {
-            setStockCount(prev => {
-                if (prev > 15) {
-                    return Math.max(15, prev - Math.floor(Math.random() * 3));
-                }
-                return prev;
-            });
-        }, 30000); // Decrease stock every 30 seconds
+            setStockCount(prev => Math.max(15, prev - Math.floor(Math.random() * 2)));
+        }, 30000);
 
         return () => clearInterval(stockTimer);
     }, []);
 
     return (
-        <div className="bg-gradient-to-r from-green-600 via-green-500 to-emerald-500 py-16 relative overflow-hidden">
-            {/* Animated Background */}
-            <div className="absolute inset-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-green-600/20 to-emerald-500/20 animate-pulse"></div>
-                <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-bounce"></div>
-                <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 py-16 relative overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-10 left-10 w-40 h-40 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-10 right-10 w-48 h-48 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Flash Sale Header */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center bg-white rounded-full px-6 py-3 shadow-lg mb-6 animate-pulse">
-                        <span className="text-2xl mr-3">⚡</span>
-                        <span className="text-green-600 font-bold text-lg">FLASH SALE ENDING SOON</span>
-                    </div>
-                    
-                    <h2 className="text-5xl font-bold text-white mb-4">
-                        Limited Time Offer!
-                    </h2>
-                    <p className="text-xl text-green-100 max-w-3xl mx-auto">
-                        Don't miss your chance to start your alcohol-free journey at the lowest price ever!
-                    </p>
-                </div>
-
-                {/* Countdown Timer */}
-                <div className="bg-black/30 backdrop-blur-sm rounded-2xl p-8 mb-12 border border-white/20">
-                    <div className="text-center mb-6">
-                        <h3 className="text-2xl font-bold text-white mb-2">Sale Ends In:</h3>
-                        <p className="text-green-200">Hurry! This exclusive discount won't last long</p>
-                    </div>
-                    
-                    <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
-                        <div className="bg-white rounded-lg p-4 text-center shadow-lg">
-                            <div className="text-3xl font-bold text-green-600">{String(timeLeft.hours).padStart(2, '0')}</div>
-                            <div className="text-sm text-gray-600 font-medium">HOURS</div>
-                        </div>
-                        <div className="bg-white rounded-lg p-4 text-center shadow-lg">
-                            <div className="text-3xl font-bold text-green-600">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                            <div className="text-sm text-gray-600 font-medium">MINUTES</div>
-                        </div>
-                        <div className="bg-white rounded-lg p-4 text-center shadow-lg animate-pulse">
-                            <div className="text-3xl font-bold text-green-600">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                            <div className="text-sm text-gray-600 font-medium">SECONDS</div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Offer Details */}
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                    {/* Left Side - Offer Details */}
-                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                        <div className="mb-6">
-                            <div className="flex items-center justify-between mb-4">
-                                <span className="text-2xl text-white font-bold">Special Price:</span>
-                                <div className="text-right">
-                                    <div className="text-3xl font-bold text-yellow-300">₹3,990</div>
-                                    <div className="text-lg text-green-200 line-through">₹6,990</div>
-                                </div>
-                            </div>
-                            
-                            <div className="bg-emerald-500 text-white px-4 py-2 rounded-lg text-center font-bold mb-4">
-                                Save ₹4,000 (57% OFF)
-                            </div>
-                        </div>
-
-                        {/* Stock Alert */}
-                        <div className="bg-emerald-700/50 border border-emerald-400 rounded-lg p-4 mb-6">
-                            <div className="flex items-center justify-between mb-2">
-                                <span className="text-white font-semibold">🔥 Only {stockCount} left in stock!</span>
-                                <span className="text-green-200 text-sm animate-pulse">High Demand</span>
-                            </div>
-                            <div className="w-full bg-emerald-900 rounded-full h-2">
-                                <div 
-                                    className="bg-gradient-to-r from-yellow-400 to-emerald-400 h-2 rounded-full transition-all duration-1000"
-                                    style={{ width: `${(stockCount / 100) * 100}%` }}
-                                ></div>
-                            </div>
-                            <p className="text-green-200 text-xs mt-1">Stock selling fast!</p>
-                        </div>
-
-                        {/* Bonus Offers */}
-                        <div className="space-y-3 mb-6">
-                            <div className="flex items-center space-x-3 text-white">
-                                <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                                <span>FREE shipping (worth ₹200)</span>
-                            </div>
-                            <div className="flex items-center space-x-3 text-white">
-                                <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                                <span>15-day money-back guarantee</span>
-                            </div>
-                            <div className="flex items-center space-x-3 text-white">
-                                <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                                <span>Bonus wellness guide (worth ₹1,500)</span>
-                            </div>
-                        </div>
-
-                        {/* CTA Button */}
-                        <a href="/product" className="block">
-                            <button className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold py-4 px-6 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl animate-pulse">
-                                🚀 CLAIM YOUR DISCOUNT NOW
-                            </button>
-                        </a>
-                    </div>
-
-                    {/* Right Side - Social Proof */}
-                    <div className="space-y-6">
-                        {/* Recent Purchases */}
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                            <h4 className="text-xl font-bold text-white mb-4">🔥 Recent Purchases</h4>
-                            <div className="space-y-3">
-                                { [
-                                    { name: "Rajesh K.", location: "Chennai", time: "2 minutes ago" },
-                                    { name: "Priya S.", location: "Bangalore", time: "5 minutes ago" },
-                                    { name: "Arjun M.", location: "Hyderabad", time: "8 minutes ago" },
-                                    { name: "Kavitha R.", location: "Kochi", time: "12 minutes ago" }
-                                ].map((purchase, index) => (
-                                    <div key={index} className="flex items-center justify-between text-white border-b border-white/20 pb-2">
-                                        <div>
-                                            <span className="font-medium">{purchase.name}</span>
-                                            <span className="text-green-200 text-sm ml-2">{purchase.location}</span>
-                                        </div>
-                                        <span className="text-emerald-300 text-xs">{purchase.time}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Customer Count */}
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 text-center">
-                            <div className="text-4xl font-bold text-yellow-300 mb-2">10,000+</div>
-                            <div className="text-white font-medium">Satisfied Customers</div>
-                            <div className="text-green-200 text-sm">Join them today!</div>
-                        </div>
-
-                        {/* Risk-Free Guarantee */}
-                        <div className="bg-emerald-600/20 border border-emerald-400 rounded-xl p-6">
-                            <div className="text-center">
-                                <div className="text-3xl mb-2">🛡️</div>
-                                <h4 className="text-xl font-bold text-white mb-2">100% Risk-Free</h4>
-                                <p className="text-emerald-200 text-sm">Not satisfied? Get your money back within 15 days. No questions asked!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Bottom Warning */}
-                <div className="text-center mt-8">
-                    <div className="bg-emerald-700/50 border border-emerald-400 rounded-lg p-4 max-w-2xl mx-auto">
-                        <p className="text-white font-bold text-lg">⚠️ WARNING: Price will return to ₹6,990 after this sale!</p>
-                        <p className="text-green-200 text-sm">This is your last chance to get Dr. Alcofree at this special price</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const YouTubeSection = () => {
-    return (
-        <div className="bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                        See How <span className="text-blue-600">Dr. Alcofree</span> Works
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Watch real stories of transformation and learn how our natural formula supports your journey to an alcohol-free life.
-                    </p>
-                </div>
-
-                {/* Featured Video */}
-                <div className="max-w-4xl mx-auto mb-12">
-                    <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-                        <div className="relative aspect-video">
-                            <iframe
-                                className="w-full h-full rounded-t-2xl"
-                                src="https://www.youtube.com/embed/OMZullz8DCc"
-                                title="Dr. Alcofree - Natural Alcohol Recovery Solution"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
+                {/* Two Column Layout */}
+                <div className="flex flex-col lg:flex-row gap-8 items-center">
+                    {/* Left Column - Video */}
+                    <div className="w-full lg:w-1/2">
+                        <div className="text-center lg:text-left mb-8">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                                    See Real Results
+                                </span>
+                            </h2>
                         </div>
                         
+                        <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-200/20 p-2 sm:p-4 overflow-hidden group transition-all duration-300 hover:shadow-blue-400/30">
+                            {/* Animated Border */}
+                            <div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-hover:shadow-lg transition-all duration-300" style={{zIndex:2}}></div>
+                            {/* Video Iframe */}
+                            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl border border-white/10">
+                                <iframe
+                                    className="w-full h-full"
+                                    src="https://www.youtube.com/embed/OMZullz8DCc?rel=0&modestbranding=1&showinfo=0"
+                                    title="D-52 - Natural Diabetes Support Formula"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    style={{zIndex:3, position:'relative'}}
+                                ></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column - Urgency */}
+                    <div className="w-full lg:w-1/2">
+                        <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-6 lg:p-8">
+                            {/* Header */}
+                            <div className="text-center mb-8">
+                                <div className="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full px-5 py-2 shadow-lg mb-4">
+                                    <span className="font-bold tracking-wide">LIMITED TIME OFFER</span>
+                                </div>
+                                <h2 className="text-3xl font-extrabold text-white mb-2 drop-shadow">Special Deal Ends Soon!</h2>
+                            </div>
+
+                            {/* Timer */}
+                            <div className="mb-8">
+                                <h3 className="text-white font-semibold text-lg mb-3 text-center">Time Left</h3>
+                                <div className="flex justify-center space-x-2">
+                                    <div className="bg-white/80 rounded-xl p-3 text-center shadow min-w-[70px]">
+                                        <div className="text-2xl font-bold text-blue-700">{String(timeLeft.hours).padStart(2, '0')}</div>
+                                        <div className="text-xs text-gray-600">HRS</div>
+                                    </div>
+                                    <div className="bg-white/80 rounded-xl p-3 text-center shadow min-w-[70px]">
+                                        <div className="text-2xl font-bold text-blue-700">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                                        <div className="text-xs text-gray-600">MIN</div>
+                                    </div>
+                                    <div className="bg-white/80 rounded-xl p-3 text-center shadow animate-pulse min-w-[70px]">
+                                        <div className="text-2xl font-bold text-blue-700">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                                        <div className="text-xs text-gray-600">SEC</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Price and Stock */}
+                            <div className="text-center mb-8">
+                                <div className="mb-4">
+                                    <div className="text-4xl font-extrabold text-purple-200">₹3,990</div>
+                                    <div className="text-lg text-white/70 line-through">₹6,990</div>
+                                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold inline-block mt-2 shadow">
+                                        Save 43%
+                                    </div>
+                                </div>
+
+                                {/* Stock Alert */}
+                                <div className="bg-gradient-to-r from-blue-600/80 to-purple-600/80 border border-blue-300/30 rounded-xl p-3 mt-4">
+                                    <div className="text-white font-semibold text-sm flex items-center justify-center gap-2">
+                                        <span className="animate-bounce">🔥</span> Only {stockCount} left at this price!
+                                    </div>
+                                    <div className="w-full bg-white/20 rounded-full h-2 mt-2">
+                                        <div 
+                                            className="bg-gradient-to-r from-cyan-400 to-purple-400 h-2 rounded-full transition-all duration-1000"
+                                            style={{ width: `${Math.min(100, (stockCount / 100) * 100)}%` }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* CTA */}
+                            <div>
+                                <div className="flex justify-center gap-4 mb-4">
+                                    <div className="flex items-center gap-2 text-white/90">
+                                        <span>🚚</span>
+                                        <span>FREE Shipping</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-white/90">
+                                        <span>🛡️</span>
+                                        <span>Money-Back Guarantee</span>
+                                    </div>
+                                </div>
+                                <a href="/product" className="block">
+                                    <button className="w-full bg-white text-black font-bold py-4 px-6 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                        <img src={buy} alt="Buy Now" className="w-14 inline-block mr-2" />
+                                        Claim Your Discount Now
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <style jsx>{`
+                .group:hover .animate-pulse {
+                    animation-play-state: paused;
+                }
+            `}</style>
+            <div>
+                <img src={banner3} alt="Banner 3" className="w-full h-auto" />
             </div>
         </div>
     );
 };
+
 
 
 
@@ -719,9 +692,7 @@ const Home = ({ currentLang, translations }) => {
                     <Hero currentLang={currentLang} />
                     <Product currentLang={currentLang} translations={translations} />
                     <ProductSection currentLang={currentLang} />
-                    <YouTubeSection />
-                    <UrgencySection />
-                    <AmazonSection />
+                    <UrgencyAndVideoSection />
                     <FAQ currentLang={currentLang} translations={translations} />
                     <Testimonials currentLang={currentLang} translations={translations} />
                 </div>

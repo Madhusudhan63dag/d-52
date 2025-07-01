@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
-import contact from '../assets/images/contact.webp';
 
 const Contact = ({ translations, currentLang }) => {
     const [status, setStatus] = useState('');
@@ -165,7 +164,7 @@ const Contact = ({ translations, currentLang }) => {
                         referrerPolicy="no-referrer-when-downgrade"
                         title="Google Map"
                     ></iframe> */}
-                    <img src={contact} alt="Contact Us" className="w-full h-full object-cover" />
+                    {/* <img src={contact} alt="Contact Us" className="w-full h-full object-cover" /> */}
                 </div>
             </div>
         </div>

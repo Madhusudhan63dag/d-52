@@ -339,7 +339,7 @@ const Checkout = ({ translations, currentLang }) => {
                 key: orderData.key,
                 amount: orderData.order.amount,
                 currency: orderData.order.currency,
-                name: 'Dr. Alcofree',
+                name: 'D-52',
                 description: `Order for ${orderDetails.productName}`,
                 order_id: orderData.order.id,
                 prefill: {
@@ -480,7 +480,7 @@ const Checkout = ({ translations, currentLang }) => {
             </div>
 
             <div className="space-y-4">
-                <div className="flex justify-between py-2 border-t border-gray-200">
+                {/* <div className="flex justify-between py-2 border-t border-gray-200">
                     <label className="text-gray-700">
                         Promo Code
                     </label>
@@ -500,10 +500,10 @@ const Checkout = ({ translations, currentLang }) => {
                 </div>
                 {formErrors.promoCode && (
                     <p className="text-red-500 text-sm mt-1">{formErrors.promoCode}</p>
-                )}
+                )} */}
 
                 {/* Alternative Purchase Options */}
-                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                {/* <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
                     <h4 className="font-semibold text-gray-800 mb-2">Alternative Purchase Options</h4>
                     <div className="space-y-2">
                         <div className="flex items-center justify-between">
@@ -515,11 +515,10 @@ const Checkout = ({ translations, currentLang }) => {
                                 </div>
                                 <span className="text-sm text-gray-700">Amazon Prime eligible</span>
                             </div>
-                            <a href={userCountry === 'USD' ? "https://www.amazon.in/Dr-Alcofree-Natural-Alcohol-Recovery/dp/B0B28KXNL7" : "https://www.amazon.in/Dr-Alcofree-Natural-Alcohol-Recovery/dp/B0B28KXNL7"} id="amazon" className="amazon text-xs text-orange-600 underline">View on Amazon</a>
-                        </div>
-                        <p className="text-xs text-gray-600">Same Dr. Alcofree product, multiple trusted platforms</p>
+                            <a href={userCountry === 'USD' ? "https://www.amazon.in/D-52-Natural-Diabetes-Support/dp/B0B28KXNL7" : "https://www.amazon.in/D-52-Natural-Diabetes-Support/dp/B0B28KXNL7"} id="amazon" className="amazon text-xs text-orange-600 underline">View on Amazon</a>
+                        </div>                            <p className="text-xs text-gray-600">Same D-52 product, multiple trusted platforms</p>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Rest of the order summary */}
                 <div className="flex justify-between py-4 border-t border-gray-200">

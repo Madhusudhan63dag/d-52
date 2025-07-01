@@ -34,8 +34,8 @@ const Footer = ({ currentLang, translations }) => {
                     <h3 className="text-lg font-bold mb-4">{translations[currentLang].contact.info}</h3>
                     <ul className="space-y-2">
                         <li><a href={translations[currentLang].nav.homelink} className="text-gray-400 hover:text-white">{translations[currentLang].nav.home}</a></li>
-                        <li><a href={translations[currentLang].nav.aboutUslink} className="text-gray-400 hover:text-white">{translations[currentLang].nav.aboutUs}</a></li>
-                        <li><a href={translations[currentLang].nav.productlink} className="text-gray-400 hover:text-white">{translations[currentLang].nav.Product}</a></li>
+                        {/* <li><a href={translations[currentLang].nav.aboutUslink} className="text-gray-400 hover:text-white">{translations[currentLang].nav.aboutUs}</a></li> */}
+                        <li><a href={translations[currentLang].nav.productlink} className="text-gray-400 hover:text-white">{translations[currentLang].nav.product}</a></li>
                         <li><a href={translations[currentLang].nav.contactUslink} className="text-gray-400 hover:text-white">{translations[currentLang].nav.contactUs}</a></li>
                     </ul>
                 </div>

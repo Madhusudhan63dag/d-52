@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Globe } from 'lucide-react';
+import { Globe, ChevronDown } from 'lucide-react';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/imagess/logo.webp';
 import icons_one from '../assets/imagess/icon1.webp';
@@ -11,10 +11,17 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
-    // Set isLoaded to true after component mounts to trigger animations
     useEffect(() => {
         setIsLoaded(true);
+        
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     console.log('Current Language:', currentLang);
@@ -33,198 +40,302 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
         if (isLangMenuOpen) setIsLangMenuOpen(false);
     };
 
-    const toggleLangMenu = () => {
-        setIsLangMenuOpen(!isLangMenuOpen);
-    };
-
-    const handleLangSelect = (langCode) => {
-        setCurrentLang(langCode);
-        setIsLangMenuOpen(false);
-        setIsMenuOpen(false);
-    };
 
     return (
-        <nav className="bg-white relative overflow-hidden">
-            {/* Animation Keyframes */}
-            <style jsx>{`
-                @keyframes popIn {
-                    0% { transform: scale(0.8); opacity: 0; }
-                    70% { transform: scale(1.1); }
-                    100% { transform: scale(1); opacity: 1; }
-                }
-                .pop-in {
-                    animation: popIn 0.5s ease forwards;
-                }
+        <>
+            {/* Marquee Banner */}
+            <div className="bg-black text-white py-2 relative overflow-hidden z-50">
+                <style jsx>{`
+                    @keyframes marquee {
+                        0% { transform: translateX(100%); }
+                        100% { transform: translateX(-100%); }
+                    }
+                    
+                    .marquee {
+                        animation: marquee 15s linear infinite;
+                        white-space: nowrap;
+                    }
+                    
+                    .marquee:hover {
+                        animation-play-state: paused;
+                    }
+                `}</style>
                 
-                /* Continuous animations */
-                @keyframes pulse {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(1.05); }
-                    100% { transform: scale(1); }
-                }
-                .pulse {
-                    animation: pulse 2s ease-in-out infinite;
-                }
-                
-                @keyframes bounce {
-                    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-                    40% { transform: translateY(-10px); }
-                    60% { transform: translateY(-5px); }
-                }
-                .bounce {
-                    animation: bounce 2s ease-in-out infinite;
-                }
-                
-                @keyframes shimmer {
-                    0% { background-position: -100% 0; }
-                    100% { background-position: 200% 0; }
-                }
-                .shimmer-bg {
-                    background: linear-gradient(
-                        90deg,
-                        rgba(255,255,255,0) 0%,
-                        rgba(255,255,255,0.8) 50%,
-                        rgba(255,255,255,0) 100%
-                    );
-                    background-size: 200% 100%;
-                    animation: shimmer 8s infinite linear;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 1;
-                    pointer-events: none;
-                }
-                
-                @keyframes borderGlow {
-                    0% { box-shadow: 0 0 5px rgba(66, 153, 225, 0.1); }
-                    50% { box-shadow: 0 0 15px rgba(66, 153, 225, 0.3); }
-                    100% { box-shadow: 0 0 5px rgba(66, 153, 225, 0.1); }
-                }
-                .border-glow {
-                    animation: borderGlow 3s infinite;
-                }
-                
-                @keyframes colorCycle {
-                    0% { color: #2b6cb0; }
-                    25% { color: #4299e1; }
-                    50% { color: #3182ce; }
-                    75% { color: #2c5282; }
-                    100% { color: #2b6cb0; }
-                }
-                .color-cycle {
-                    animation: colorCycle 8s infinite;
-                }
-
-                /* Staggered animations */
-                .staggered-item:nth-child(1) { animation-delay: 0.1s; }
-                .staggered-item:nth-child(2) { animation-delay: 0.2s; }
-                .staggered-item:nth-child(3) { animation-delay: 0.3s; }
-                .staggered-item:nth-child(4) { animation-delay: 0.4s; }
-                .staggered-item:nth-child(5) { animation-delay: 0.5s; }
-
-                @keyframes slideDown {
-                    0% { opacity: 0; transform: translateY(-10px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .slide-down {
-                    animation: slideDown 0.3s ease forwards;
-                }
-            `}</style>
-
-            {/* Shimmer background effect */}
-            <div className="shimmer-bg"></div>
-            
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="flex justify-between items-center h-16 sm:h-20">
-                    {/* Logo with pulse animation */}
-                    <div className={`flex-shrink-0 ${isLoaded ? 'pop-in pulse' : 'opacity-0'}`}>
-                        <a href={nav.homelink || "#"}>
-                            <img src={logo} alt="Dr. Joints Logo" className="h-8 sm:h-12 md:h-16" />
-                        </a>
-                    </div>
-
-                    {/* Desktop Navigation with bounce animations */}
-                    <div className="hidden md:flex items-center px-2">
-                        <a href={nav.homelink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 flex justify-center px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}>
-                            {/* <img src={icons_one} alt="Home Icon" className="inline-block h-6 w-6 mr-1" /> */}
-                            <span className="color-cycle">{nav.home}</span>
-                        </a>
-                        <a href={nav.aboutUslink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 flex justify-center px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
-                            style={{animationDelay: '0.5s'}}>
-                            <img src={icons_two} alt="About Us Icon" className="inline-block h-6 w-6 mr-1" />
-                            {nav.aboutUs}
-                        </a>
-                        <a href={nav.productlink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
-                            style={{animationDelay: '1s'}}>
-                            <img src={icons_three} alt="Product Icon" className="inline-block h-6 w-6 mr-1" />
-                            {nav.product}
-                        </a>
-                        <a href={nav.contactUslink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
-                            style={{animationDelay: '1.5s'}}>
-                            <img src={icons_four} alt="Contact Us Icon" className="inline-block h-6 w-6 mr-1" />
-                            {nav.contactUs}
-                        </a>
-                        {/* <a href={nav.bloglink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
-                            style={{animationDelay: '2s'}}>
-                            <Globe className="inline-block h-6 w-6 mr-1" />
-                            {nav.blog}
-                        </a> */}
-                    </div>
-
-                    {/* Mobile Menu Button with pulse animation */}
-                    <div className={`md:hidden flex items-center ${isLoaded ? 'pop-in pulse' : 'opacity-0'}`}>
-                        <button
-                            onClick={toggleMenu}
-                            className="text-gray-700 hover:text-blue-600 p-2 transition-transform active:scale-90 hover:scale-110 color-cycle"
-                        >
-                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
+                <div className="marquee">
+                    <span className="text-sm font-medium flex items-center space-x-8">
+                        <span className="flex items-center space-x-2">
+                            <span>FREE SHIPPING ON ALL ORDERS</span>
+                        </span>
+                        <span className="flex items-center space-x-2">
+                            <span>LIMITED TIME OFFER</span>
+                        </span>
+                        <span className="flex items-center space-x-2">
+                            <span>100% SATISFACTION GUARANTEED</span>
+                        </span>
+                        <span className="flex items-center space-x-2">
+                            <span>FAST & SECURE DELIVERY</span>
+                        </span>
+                    </span>
                 </div>
             </div>
 
-            {/* Mobile Navigation Menu */}
-            {isMenuOpen && (
-                <>
-                    <div className="md:hidden fixed inset-0 bg-black bg-opacity-20 z-40" onClick={toggleMenu}></div>
-                    <div className="md:hidden fixed top-0 left-0 right-0 bg-white z-50 pop-in slide-down border-glow">
-                        <div className="px-4 pt-2 pb-4 space-y-2">
-                            <a href={nav.homelink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-3 hover:scale-105 transition-transform pop-in staggered-item bounce">
-                                {nav.home}
+            <nav className={`relative z-50 transition-all duration-500 ${
+                scrolled 
+                    ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-sky-200/50' 
+                    : 'bg-gradient-to-r from-sky-50/90 via-white/95 to-blue-50/90 backdrop-blur-md'
+            }`}>
+                {/* Enhanced Animation Keyframes */}
+                <style jsx>{`
+                    @keyframes floatIn {
+                        0% { transform: translateY(-30px) scale(0.9); opacity: 0; }
+                        50% { transform: translateY(-5px) scale(1.02); }
+                        100% { transform: translateY(0) scale(1); opacity: 1; }
+                    }
+                    
+                    @keyframes gentleFloat {
+                        0%, 100% { transform: translateY(0px); }
+                        50% { transform: translateY(-4px); }
+                    }
+                    
+                    @keyframes skyPulse {
+                        0%, 100% { 
+                            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+                            transform: scale(1);
+                        }
+                        50% { 
+                            box-shadow: 0 0 30px rgba(14, 165, 233, 0.5);
+                            transform: scale(1.02);
+                        }
+                    }
+                    
+                    @keyframes gradientWave {
+                        0% { background-position: 0% 50%; }
+                        50% { background-position: 100% 50%; }
+                        100% { background-position: 0% 50%; }
+                    }
+                    
+                    @keyframes cardHover {
+                        0% { transform: translateY(0) scale(1); }
+                        100% { transform: translateY(-2px) scale(1.05); }
+                    }
+                    
+                    @keyframes ripple {
+                        0% { transform: scale(0); opacity: 1; }
+                        100% { transform: scale(4); opacity: 0; }
+                    }
+                    
+                    .float-in { animation: floatIn 0.8s ease-out forwards; }
+                    .gentle-float { animation: gentleFloat 3s ease-in-out infinite; }
+                    .sky-pulse { animation: skyPulse 2s ease-in-out infinite; }
+                    .gradient-wave { animation: gradientWave 6s ease infinite; }
+                    
+                    .nav-card {
+                        position: relative;
+                        background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,249,255,0.8));
+                        border: 1px solid rgba(14, 165, 233, 0.2);
+                        backdrop-filter: blur(10px);
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        overflow: hidden;
+                    }
+                    
+                    .nav-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -100%;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+                        transition: left 0.5s ease;
+                    }
+                    
+                    .nav-card:hover::before {
+                        left: 100%;
+                    }
+                    
+                    .nav-card:hover {
+                        transform: translateY(-2px) scale(1.02);
+                        box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+                        border-color: rgba(14, 165, 233, 0.4);
+                    }
+                    
+                    .logo-glow {
+                        filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.3));
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .logo-glow:hover {
+                        filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
+                        transform: scale(1.05);
+                    }
+                    
+                    .center-container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                    }
+                    
+                    .nav-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        max-width: 1000px;
+                        width: 100%;
+                        margin: 0 auto;
+                        padding: 0 2rem;
+                    }
+                    
+                    .mobile-menu-card {
+                        background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,249,255,0.9));
+                        backdrop-filter: blur(20px);
+                        border: 1px solid rgba(14, 165, 233, 0.2);
+                    }
+                    
+                    .ripple-effect {
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .ripple-effect::after {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 0;
+                        height: 0;
+                        border-radius: 50%;
+                        background: rgba(14, 165, 233, 0.3);
+                        transform: translate(-50%, -50%);
+                        transition: width 0.3s, height 0.3s;
+                    }
+                    
+                    .ripple-effect:active::after {
+                        width: 300px;
+                        height: 300px;
+                    }
+                    
+                    @keyframes slideInFromRight {
+                        0% { transform: translateX(100%); opacity: 0; }
+                        100% { transform: translateX(0); opacity: 1; }
+                    }
+                    
+                    .slide-in-right { animation: slideInFromRight 0.4s ease-out; }
+                `}</style>
+
+                <div className="center-container h-16 sm:h-20">
+                    <div className="nav-wrapper">
+                        {/* Enhanced Logo */}
+                        <div className={`flex-shrink-0 ${isLoaded ? 'float-in gentle-float' : 'opacity-0'}`}>
+                            <a href={nav.homelink || "#"} className="block">
+                                <div className="relative group">
+                                    <div className="absolute -inset-3 bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400 rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500 blur-lg"></div>
+                                    <img 
+                                        src={logo} 
+                                        alt="Dr. Joints Logo" 
+                                        className="relative h-10 sm:h-14 md:h-16 logo-glow" 
+                                    />
+                                </div>
                             </a>
-                            <a href={nav.aboutUslink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
-                                style={{animationDelay: '0.3s'}}>
-                                {nav.aboutUs}
-                            </a>
-                            <a href={nav.productlink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
-                                style={{animationDelay: '0.6s'}}>
-                                {nav.product}
-                            </a>
-                            <a href={nav.contactUslink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
-                                style={{animationDelay: '0.9s'}}>
-                                {nav.contactUs}
-                            </a>
-                            {/* <a href={nav.bloglink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
-                                style={{animationDelay: '1.2s'}}>
-                                {nav.blog}
-                            </a> */}
+                        </div>
+
+                        {/* Centered Desktop Navigation */}
+                        <div className="hidden md:flex items-center justify-center flex-1 mx-8">
+                            <div className="flex items-center space-x-2">
+                                <a href={nav.homelink || "#"}
+                                    className={`nav-card flex px-6 py-3 rounded-xl text-gray-700 hover:text-sky-600 font-medium transition-all duration-300 ripple-effect ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                    style={{animationDelay: '0.1s'}}>
+                                    <img src={icons_four} alt="Contact Us Icon" className="h-5 w-5 mr-2 transition-transform duration-300" />
+                                    <span className="relative z-10">{nav.home}</span>
+                                </a>
+                                
+                                {/* <a href={nav.aboutUslink || "#"}
+                                    className={`nav-card px-6 py-3 rounded-xl text-gray-700 hover:text-sky-600 font-medium transition-all duration-300 flex items-center space-x-2 ripple-effect ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                    style={{animationDelay: '0.2s'}}>
+                                    <img src={icons_two} alt="About Us Icon" className="h-5 w-5 transition-transform duration-300" />
+                                    <span className="relative z-10">{nav.aboutUs}</span>
+                                </a> */}
+                                
+                                <a href={nav.productlink || "#"}
+                                    className={`nav-card px-6 py-3 rounded-xl text-gray-700 hover:text-sky-600 font-medium transition-all duration-300 flex items-center space-x-2 ripple-effect ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                    style={{animationDelay: '0.3s'}}>
+                                    <img src={icons_three} alt="Product Icon" className="h-5 w-5 transition-transform duration-300" />
+                                    <span className="relative z-10">{nav.product}</span>
+                                </a>
+                                
+                                <a href={nav.contactUslink || "#"}
+                                    className={`nav-card px-6 py-3 rounded-xl text-gray-700 hover:text-sky-600 font-medium transition-all duration-300 flex items-center space-x-2 ripple-effect ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                    style={{animationDelay: '0.4s'}}>
+                                    <span className="relative z-10">{nav.contactUs}</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Language Selector and Mobile Menu */}
+                        <div className="flex items-center space-x-4">
+                            {/* Enhanced Mobile Menu Button */}
+                            <div className={`md:hidden ${isLoaded ? 'float-in sky-pulse' : 'opacity-0'}`}>
+                                <button onClick={toggleMenu} className="nav-card p-3 rounded-xl hover:bg-sky-50/50 transition-all duration-300 group" >
+                                    <div className="relative">
+                                        {isMenuOpen ? (
+                                            <X size={24} className="text-sky-600 transition-all duration-300 group-hover:rotate-90" />
+                                        ) : (
+                                            <Menu size={24} className="text-sky-600 transition-all duration-300 group-hover:scale-110" />
+                                        )}
+                                    </div>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </>
-            )}
-        </nav>
+                </div>
+
+                {/* Enhanced Mobile Navigation Menu */}
+                {isMenuOpen && (
+                    <>
+                        <div className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={toggleMenu}></div>
+                        <div className="md:hidden absolute top-full left-4 right-4 mobile-menu-card rounded-2xl z-50 shadow-2xl overflow-hidden">
+                            <div className="p-6">
+                                {/* Centered Menu Header */}
+                                <div className="text-center mb-6">
+                                    <h3 className="text-xl font-bold text-sky-600 mb-2">Navigation</h3>
+                                    <div className="w-16 h-1 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full mx-auto"></div>
+                                </div>
+
+                                {/* Centered Menu Items */}
+                                <div className="space-y-3">
+                                    <a href={nav.homelink || "#"}
+                                        className={`block text-center text-gray-700 hover:text-sky-600 px-6 py-4 rounded-xl nav-card transition-all duration-300 hover:bg-sky-50/50 ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                        style={{animationDelay: '0.1s'}}>
+                                        <img src={icons_four} alt="Contact Us Icon" className="h-6 w-6" />
+                                        <span className="font-medium text-lg">{nav.home}</span>
+                                    </a>
+                                    
+                                    {/* <a href={nav.aboutUslink || "#"}
+                                        className={`block text-center text-gray-700 hover:text-sky-600 px-6 py-4 rounded-xl nav-card transition-all duration-300 hover:bg-sky-50/50 flex items-center justify-center space-x-3 ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                        style={{animationDelay: '0.2s'}}>
+                                        <img src={icons_two} alt="About Us Icon" className="h-6 w-6" />
+                                        <span className="font-medium text-lg">{nav.aboutUs}</span>
+                                    </a> */}
+                                    
+                                    <a href={nav.productlink || "#"}
+                                        className={`block text-center text-gray-700 hover:text-sky-600 px-6 py-4 rounded-xl nav-card transition-all duration-300 hover:bg-sky-50/50 flex items-center justify-center space-x-3 ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                        style={{animationDelay: '0.3s'}}>
+                                        <img src={icons_three} alt="Product Icon" className="h-6 w-6" />
+                                        <span className="font-medium text-lg">{nav.product}</span>
+                                    </a>
+                                    
+                                    <a href={nav.contactUslink || "#"}
+                                        className={`block text-center text-gray-700 hover:text-sky-600 px-6 py-4 rounded-xl nav-card transition-all duration-300 hover:bg-sky-50/50 flex items-center justify-center space-x-3 ${isLoaded ? 'float-in' : 'opacity-0'}`}
+                                        style={{animationDelay: '0.4s'}}>
+                                        <span className="font-medium text-lg">{nav.contactUs}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+            </nav>
+        </>
     );
 };
 

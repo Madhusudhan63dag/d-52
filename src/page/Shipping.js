@@ -32,7 +32,7 @@ const ShippingPolicy = () => {
                 <p className="text-gray-700 mb-4"><strong>Delivery Verification</strong>: Valid ID proof may be required for specific items. Digital signature capture is required at delivery. Unattended delivery is not permitted.</p>
 
                 <h2 className="text-2xl font-semibold mb-4">6. Special Cases</h2>
-                <p className="text-gray-700 mb-4"><strong>Bulk Orders</strong>: Special shipping arrangements are available for bulk orders. Custom delivery timelines can be discussed with our team. Additional handling charges may apply.</p>
+                <p className="text-gray-700 mb-4"><strong>Bulk Orders</strong>: Special shipping arrangements are available for bulk orders of D-52. Custom delivery timelines can be discussed with our team. Additional handling charges may apply.</p>
 
                 <h2 className="text-2xl font-semibold mb-4">7. Shipping Restrictions</h2>
                 <p className="text-gray-700 mb-4"><strong>Weather Conditions</strong>: Delivery times may be affected during severe weather conditions, natural disasters, or local disturbances. In such cases, orders will be rescheduled, and customers will be notified with updated timelines.</p>
