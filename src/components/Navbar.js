@@ -223,10 +223,10 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                     .slide-in-right { animation: slideInFromRight 0.4s ease-out; }
                 `}</style>
 
-                <div className="center-container h-16 sm:h-20">
-                    <div className="nav-wrapper">
-                        {/* Enhanced Logo */}
-                        <div className={`flex-shrink-0 ${isLoaded ? 'float-in gentle-float' : 'opacity-0'}`}>
+                <div className=" h-16 sm:h-20">
+                    <div className="flex justify-between">
+                        {/* Logo - Left aligned */}
+                        <div className={`flex-shrink-0 ml-10 ${isLoaded ? 'float-in gentle-float' : 'opacity-0'}`}>
                             <a href={nav.homelink || "#"} className="block">
                                 <div className="relative group">
                                     <div className="absolute -inset-3 bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400 rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500 blur-lg"></div>
@@ -239,7 +239,7 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                             </a>
                         </div>
 
-                        {/* Centered Desktop Navigation */}
+                        {/* Navigation - Center aligned */}
                         <div className="hidden md:flex items-center justify-center flex-1 mx-8">
                             <div className="flex items-center space-x-2">
                                 <a href={nav.homelink || "#"}
@@ -271,7 +271,7 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                             </div>
                         </div>
 
-                        {/* Language Selector and Mobile Menu */}
+                        {/* Mobile menu - Right aligned */}
                         <div className="flex items-center space-x-4">
                             {/* Enhanced Mobile Menu Button */}
                             <div className={`md:hidden ${isLoaded ? 'float-in sky-pulse' : 'opacity-0'}`}>

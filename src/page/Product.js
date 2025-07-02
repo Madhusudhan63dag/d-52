@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import product1 from '../assets/imagess/4.webp';
+import product1 from '../assets/imagess/1.webp';
 import product2 from '../assets/imagess/3.webp';
 import product3 from '../assets/imagess/2.webp';
 import diabetesHero from '../assets/product.webp';
+import lifestyleImage from '../assets/imagess/about2.webp';
+// import chartImage from '../assets/blood-sugar-chart.webp';
 
 
 
@@ -76,10 +78,70 @@ const Product = ({ translations, currentLang }) => {
     const productImages = [product1, product2, product3];
 
     return (
-        <div className="w-full min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-cyan-100 flex flex-col items-center justify-center py-16 px-2">
+        <div className="w-full min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-cyan-100 flex flex-col items-center justify-center py-16 px-2 pb-20 md:pb-16">
+            {/* Sticky CTA Bar */}
+            <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-green-500 shadow-2xl z-50 p-3 md:hidden">
+                <div className="flex items-center justify-between gap-3">
+                    {/* Product Thumbnail */}
+                    <div className="flex-shrink-0">
+                        <img 
+                            src={productImages[0]} 
+                            alt="D-52 Product" 
+                            className="w-12 h-12 object-contain rounded-lg border border-gray-200"
+                        />
+                    </div>
+                    
+                    {/* Price Info */}
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-gray-400 line-through">₹5,990</span>
+                            <span className="text-lg font-extrabold text-green-700">₹3,990</span>
+                        </div>
+                        <div className="text-xs text-red-600 font-medium">
+                            Only {stockCount} left!
+                        </div>
+                    </div>
+                    
+                    {/* Order Button */}
+                    <button
+                        onClick={handleCheckout}
+                        className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 shadow-lg text-sm whitespace-nowrap"
+                    >
+                        Order Now
+                    </button>
+                </div>
+            </div>
+
+            {/* Desktop Sticky CTA (hidden on mobile) */}
+            <div className="fixed bottom-6 right-6 bg-white rounded-xl shadow-2xl border-2 border-green-500 p-4 z-50 hidden md:block max-w-sm">
+                <div className="flex items-center gap-3">
+                    <img 
+                        src={productImages[0]} 
+                        alt="D-52 Product" 
+                        className="w-16 h-16 object-contain rounded-lg border border-gray-200"
+                    />
+                    <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">D-52 Diabetes Support</div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-sm font-bold text-gray-400 line-through">₹5,990</span>
+                            <span className="text-xl font-extrabold text-green-700">₹3,990</span>
+                        </div>
+                        <button
+                            onClick={handleCheckout}
+                            className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 shadow-lg text-sm"
+                        >
+                            Order Now
+                        </button>
+                    </div>
+                </div>
+                <div className="text-xs text-red-600 font-medium text-center mt-2">
+                    🔥 Only {stockCount} boxes left at this price!
+                </div>
+            </div>
+
             <div className="w-full bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col md:flex-row overflow-hidden">
                 {/* Diabetes Hero Image */}
-                <div className="md:w-1/2 w-full flex flex-col items-center justify-center bg-gradient-to-br from-cyan-50 via-green-50 to-blue-100 p-8">
+                <div className="md:w-1/2 w-full flex flex-col items-center justify-start bg-gradient-to-br from-cyan-50 via-green-50 to-blue-100 p-8">
                     <img
                         src={productImages[selectedImage]}
                         alt="Natural Diabetes Support Supplement"
@@ -134,28 +196,33 @@ const Product = ({ translations, currentLang }) => {
                         <span className="text-gray-600 font-medium text-sm">4.9/5 (5,000+ verified users)</span>
                     </div>
 
+                    {/* Urgency Alert - Enhanced */}
+                    <div className="mb-4 bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-200 rounded-xl p-4">
+                        <div className="text-center mb-3">
+                            <span className="text-red-600 font-bold text-lg animate-pulse">⚡ HURRY! LIMITED STOCK ⚡</span>
+                        </div>
+                        <div className="w-full bg-red-100 rounded-full h-3 mb-2">
+                            <div
+                                className="bg-gradient-to-r from-red-500 to-orange-500 h-3 rounded-full transition-all duration-1000 animate-pulse"
+                                style={{ width: `${Math.max(10, (stockCount / 50) * 100)}%` }}
+                            ></div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <span className="text-red-700 font-bold text-sm">
+                                🔥 Only {stockCount} boxes left at this price!
+                            </span>
+                            <div className="bg-red-600 text-white px-3 py-1 rounded-lg font-mono font-bold text-sm">
+                                {String(timeLeft.hours).padStart(2, '0')}:
+                                {String(timeLeft.minutes).padStart(2, '0')}:
+                                {String(timeLeft.seconds).padStart(2, '0')}
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Price */}
                     <div className="flex items-end gap-3 mb-2">
                         <span className="text-xl font-bold text-gray-400 line-through">₹5,990</span>
                         <span className="text-3xl font-extrabold text-green-700">₹3,990</span>
-                    </div>
-
-                    {/* Urgency Bar & Timer */}
-                    <div className="mb-2">
-                        <div className="w-full bg-gray-200 rounded-full h-2 mb-1">
-                        <div
-                            className="bg-gradient-to-r from-green-400 to-blue-400 h-2 rounded-full transition-all duration-1000"
-                            style={{ width: `${Math.max(10, (stockCount / 50) * 100)}%` }}
-                        ></div>
-                        </div>
-                        <div className="flex items-center justify-between text-xs text-green-700 font-bold">
-                        <span>Only {stockCount} boxes left at this price</span>
-                        <span className="font-mono bg-green-50 px-2 py-1 rounded">
-                            {String(timeLeft.hours).padStart(2, '0')}:
-                            {String(timeLeft.minutes).padStart(2, '0')}:
-                            {String(timeLeft.seconds).padStart(2, '0')}
-                        </span>
-                        </div>
                     </div>
 
                     {/* Quantity Selector */}
@@ -181,13 +248,51 @@ const Product = ({ translations, currentLang }) => {
                         </div>
                     </div>
 
+                    {/* Limited Stock Alert above CTA */}
+                    <div className="text-center mb-3">
+                        <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-4 py-2 rounded-full text-sm uppercase tracking-wide animate-pulse">
+                            🚨 Limited Stock – Selling Fast! 🚨
+                        </span>
+                    </div>
+
+                    {/* Guarantee Badges */}
+                    <div className="flex flex-wrap justify-center gap-2 mb-4">
+                        <div className="bg-gradient-to-r from-green-600 to-green-700 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                            <span>🛡️</span> 100% Satisfaction Guaranteed
+                        </div>
+                        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                            <span>👨‍⚕️</span> Doctor Recommended | AYUSH Certified
+                        </div>
+                    </div>
+
                     {/* CTA Button */}
                     <button
                         onClick={handleCheckout}
-                        className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-lg mb-2"
+                        className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-lg mb-2 relative"
                     >
-                        Order Now
+                        <span className="relative z-10">Order Now</span>
+                        <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-xl font-bold">
+                            SAVE 33%
+                        </div>
                     </button>
+
+                    {/* Trust & Scarcity Signals */}
+                    <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-3 mb-4">
+                        <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-green-700 text-sm font-medium">
+                                <span className="text-green-600">✅</span>
+                                <span>5,000+ bottles sold this week</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-orange-700 text-sm font-medium">
+                                <span className="text-orange-600">🕒</span>
+                                <span>Offer valid for the next 24 hours only</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-blue-700 text-sm font-medium">
+                                <span className="text-blue-600">🚚</span>
+                                <span>Fast-moving product: restocks every 10 days</span>
+                            </div>
+                        </div>
+                    </div>
 
                     {/* <a 
                         href="https://www.amazon.in/your-diabetes-product-link" 
@@ -209,6 +314,42 @@ const Product = ({ translations, currentLang }) => {
                     </div>
 
             </div>
+
+            {/* Lifestyle Section - High Up */}
+            <div className="w-full mt-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl shadow-lg overflow-hidden">
+                <div className="max-w-6xl mx-auto p-8">
+                    <div className="flex flex-col md:flex-row items-center gap-8">
+                        <div className="md:w-1/2">
+                            <img 
+                                src={lifestyleImage} 
+                                alt="Happy couple living healthy lifestyle with D-52" 
+                                className="rounded-xl shadow-xl w-full h-auto"
+                            />
+                        </div>
+                        <div className="md:w-1/2 text-center md:text-left">
+                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                                Join thousands of people like you transforming their lives naturally.
+                            </h3>
+                            <p className="text-lg text-gray-700 mb-6">
+                                Experience the confidence that comes with balanced blood sugar levels and renewed energy. 
+                                D-52 helps you take control of your health naturally, so you can focus on what matters most.
+                            </p>
+                            <div className="flex flex-wrap justify-center md:justify-start gap-4 text-green-700 font-semibold">
+                                <div className="flex items-center gap-2">
+                                    <span>✓</span> Natural & Safe
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span>✓</span> Proven Results
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span>✓</span> Doctor Trusted
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Product Benefits Section */}
             <div className="w-full mt-8 bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-lg overflow-hidden">
                 <div className="max-w-6xl mx-auto">
@@ -290,6 +431,43 @@ const Product = ({ translations, currentLang }) => {
                     </div>
                 </div>
             </div>
+
+            {/* Blood Sugar Chart Section */}
+            {/* <div className="w-full mt-8 bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl shadow-lg overflow-hidden">
+                <div className="max-w-6xl mx-auto p-8">
+                    <div className="text-center mb-8">
+                        <span className="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold mb-4">Clinical Evidence</span>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+                            Real Results: See the Change in Just 30 Days
+                        </h2>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Thousands of users have experienced significant improvements in their blood sugar levels within the first month of using D-52.
+                        </p>
+                    </div>
+                    
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <img 
+                            // src={chartImage} 
+                            alt="Blood sugar improvement chart showing 30-day results" 
+                            className="w-full h-auto rounded-lg"
+                        />
+                        <div className="mt-6 grid md:grid-cols-3 gap-6 text-center">
+                            <div className="bg-green-50 rounded-lg p-4">
+                                <div className="text-2xl font-bold text-green-700 mb-1">78%</div>
+                                <div className="text-sm text-gray-600">Users saw improvement within 2 weeks</div>
+                            </div>
+                            <div className="bg-blue-50 rounded-lg p-4">
+                                <div className="text-2xl font-bold text-blue-700 mb-1">92%</div>
+                                <div className="text-sm text-gray-600">Reported better energy levels</div>
+                            </div>
+                            <div className="bg-orange-50 rounded-lg p-4">
+                                <div className="text-2xl font-bold text-orange-700 mb-1">95%</div>
+                                <div className="text-sm text-gray-600">Would recommend D-52 to others</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
 
             {/* How to Use Section */}
             <div className="w-full mt-8 bg-gradient-to-br from-white to-green-50 rounded-2xl shadow-lg overflow-hidden">

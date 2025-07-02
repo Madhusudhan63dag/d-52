@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import banner1 from '../assets/imagess/banner1.webp';  // Update path as needed
-import banner1Mobile from '../assets/imagess/banner1.webp';  // Add mobile images
-import banner3 from '../assets/imagess/banner3.webp'
+import banner1 from '../assets/imagess/banner1.webp';
+import banner1Mobile from '../assets/imagess/banner1.webp';
+import banner3 from '../assets/imagess/banner2.webp';
+import banner3Mobile from '../assets/imagess/banner2.webp';
 import product from '../assets/imagess/3.webp';
 import FAQ from '../components/FAQ';
 import one from '../assets/t_one.webp';
@@ -11,6 +12,8 @@ import three from '../assets/t_three.webp';
 import four from '../assets/t_four.webp';
 import buy from '../assets/buy.png'
 import stamp from '../assets/imagess/stamp.webp';
+import about2 from '../assets/imagess/about.webp';
+import chart from '../assets/imagess/chart.webp';
 
 
 const logoCarouselStyles = `
@@ -50,12 +53,31 @@ if (typeof document !== 'undefined') {
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    
+    const banners = [
+        {
+            desktop: banner1,
+            mobile: banner1Mobile,
+        },
+        {
+            desktop: banner3,
+            mobile: banner3Mobile,
+        }
+    ];
 
-    const desktopImage = banner1;
-    const mobileImage = banner1Mobile;
-    
-    const currentImage = isMobile ? mobileImage : desktopImage;
-    
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % banners.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + banners.length) % banners.length);
+    };
+
+    const goToSlide = (index) => {
+        setCurrentSlide(index);
+    };
+
     useEffect(() => {
         setIsLoaded(true);
         
@@ -65,11 +87,17 @@ const Hero = () => {
         };
         
         window.addEventListener('resize', handleResize);
+
+        // Auto-slide timer
+        const slideTimer = setInterval(() => {
+            nextSlide();
+        }, 5000);
         
         return () => {
             window.removeEventListener('resize', handleResize);
+            clearInterval(slideTimer);
         };
-    }, [isMobile]);
+    }, []);
 
     return (
         <div className="w-full relative bg-gradient-to-b from-sky-50 to-white">
@@ -94,7 +122,7 @@ const Hero = () => {
                 .fade-in-scale { animation: fadeInScale 0.6s ease-out; }
                 
                 .hero-card {
-                    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,249,255,0.8));
+                    background: linear-gradient(135deg, rgba(200,255,200,0.9), rgba(220,255,220,0.8));
                     backdrop-filter: blur(10px);
                     border: 1px solid rgba(14, 165, 233, 0.2);
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -119,7 +147,7 @@ const Hero = () => {
                     left: -100%;
                     width: 100%;
                     height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.2), transparent);
+                    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
                     animation: shimmerSlide 2s infinite;
                     z-index: 1;
                 }
@@ -134,17 +162,125 @@ const Hero = () => {
 
             <div className="relative">
                 {/* Hero Content Container */}
-                <div className="">
+                <div className="max-w-7xl mx-auto">
                     {/* Hero Card */}
                     <div className={`hero-card overflow-hidden ${isLoaded ? 'fade-in-scale' : 'opacity-0'}`}>
-                        {/* Single Banner Image */}
-                        <div className="relative w-full h-auto">
-                            <div className="w-full image-container image-shimmer">
-                                <img
-                                    src={currentImage}
-                                    alt="D-52"
-                                    className="w-full h-auto object-cover transition-transform duration-700"
-                                />
+                        {/* Banner Images */}
+                        <div className="relative w-full h-[300px] md:h-[500px]">
+                            <div className="w-full h-full image-container image-shimmer relative">
+                                {banners.map((banner, index) => (
+                                    <div
+                                        key={index}
+                                        className={`absolute inset-0 w-full h-full transition-all duration-500 transform ${
+                                            index === currentSlide 
+                                                ? 'opacity-100 translate-x-0' 
+                                                : index < currentSlide 
+                                                    ? 'opacity-0 -translate-x-full' 
+                                                    : 'opacity-0 translate-x-full'
+                                        }`}
+                                    >
+                                        <img
+                                            src={isMobile ? banner.mobile : banner.desktop}
+                                            alt={`Banner ${index + 1}`}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                ))}
+
+                                {/* Navigation Arrows */}
+                                <button
+                                    onClick={prevSlide}
+                                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+                                >
+                                    <ChevronLeft className="w-6 h-6 text-gray-800" />
+                                </button>
+                                <button
+                                    onClick={nextSlide}
+                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+                                >
+                                    <ChevronRight className="w-6 h-6 text-gray-800" />
+                                </button>
+
+                                {/* Dots Navigation */}
+                                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+                                    {banners.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => goToSlide(index)}
+                                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                                currentSlide === index 
+                                                    ? 'bg-white w-4' 
+                                                    : 'bg-white/50 hover:bg-white/80'
+                                            }`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Lifestyle Section */}
+                    <div className={`mt-12 grid md:grid-cols-2 gap-8 items-center px-4 ${isLoaded ? 'fade-in-scale' : 'opacity-0'}`} style={{animationDelay: '0.3s'}}>
+                        {/* Text Content */}
+                        <div className="space-y-6">
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                                <span className="bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
+                                    Transform Your Life with D-52
+                                </span>
+                            </h2>
+                            
+                            <div className="space-y-6">
+                                <div className="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-green-100 shadow-sm">
+                                    <h3 className="text-xl font-semibold text-green-700 mb-2">Natural Blood Sugar Management</h3>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        Experience a life of vitality and wellness with D-52. Our scientifically formulated blend of herbs and natural ingredients works in harmony with your body to support healthy blood sugar levels throughout the day.
+                                    </p>
+                                </div>
+
+                                <div className="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-green-100 shadow-sm">
+                                    <h3 className="text-xl font-semibold text-green-700 mb-2">Enhanced Daily Energy</h3>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        Say goodbye to afternoon slumps. D-52's unique formula helps maintain consistent energy levels, allowing you to stay active and engaged from morning to night.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div className="mt-8">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Key Benefits:</h3>
+                                <ul className="space-y-4">
+                                    <li className="flex items-center space-x-3">
+                                        <span className="flex-shrink-0 w-6 h-6 bg-[#f7fdfb] text-[#22c55e] rounded-full flex items-center justify-center shadow-sm border border-[#22c55e]/20">✓</span>
+                                        <span className="text-gray-700">Clinically proven blood sugar support</span>
+                                    </li>
+                                    <li className="flex items-center space-x-3">
+                                        <span className="flex-shrink-0 w-6 h-6 bg-[#f7fdfb] text-[#f59e0b] rounded-full flex items-center justify-center shadow-sm border border-[#f59e0b]/20">✓</span>
+                                        <span className="text-gray-700">Sustained energy throughout the day</span>
+                                    </li>
+                                    <li className="flex items-center space-x-3">
+                                        <span className="flex-shrink-0 w-6 h-6 bg-[#f7fdfb] text-[#22c55e] rounded-full flex items-center justify-center shadow-sm border border-[#22c55e]/20">✓</span>
+                                        <span className="text-gray-700">Improved metabolic health</span>
+                                    </li>
+                                    <li className="flex items-center space-x-3">
+                                        <span className="flex-shrink-0 w-6 h-6 bg-[#f7fdfb] text-[#f59e0b] rounded-full flex items-center justify-center shadow-sm border border-[#f59e0b]/20">✓</span>
+                                        <span className="text-gray-700">Enhanced overall well-being</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Image Container */}
+                        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 mix-blend-overlay"></div>
+                            <img
+                                src={about2}
+                                alt="Happy senior couple enjoying healthy lifestyle"
+                                className="w-full h-full object-cover  transform hover:scale-105 transition-transform duration-700"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                                <p className="text-white text-lg font-medium">
+                                    "D-52 helped us maintain our active lifestyle and enjoy our retirement to the fullest!"
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -214,7 +350,7 @@ const Product = ({ currentLang, translations }) => {
     }, []);
 
     return (
-        <div ref={productRef} className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 py-20 overflow-hidden">
+        <div ref={productRef} className="relative bg-gradient-to-br from-[#f7fdfb] via-[#e6f4ea] to-[#f7fdfb] py-20 overflow-hidden">
             {/* Background Decorative Elements */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-green-200/30 to-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
@@ -262,14 +398,14 @@ const Product = ({ currentLang, translations }) => {
                                 />
                                 
                                 {/* Product Badge */}
-                                <div className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full shadow-lg">
+                                <div className="absolute top-4 right-4 bg-gradient-to-r from-[#f59e0b] to-amber-500 text-white px-4 py-2 rounded-full shadow-lg">
                                     <span className="font-bold text-sm">✨ Premium Quality</span>
                                 </div>
                                 
                                 {/* Trust Badges */}
                                 <div className="absolute bottom-4 left-4 flex space-x-2">
-                                    <div className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">FDA Approved</div>
-                                    <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">100% Natural</div>
+                                    <div className="bg-[#1e3a8a] text-white px-3 py-1 rounded-full text-xs font-semibold">FDA Approved</div>
+                                    <div className="bg-[#22c55e] text-white px-3 py-1 rounded-full text-xs font-semibold">100% Natural</div>
                                 </div>
                             </div>
                         </div>
@@ -308,8 +444,7 @@ const Product = ({ currentLang, translations }) => {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <a href="/product" className="flex-1">
-                                <button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-8 rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <a href="/product" className="flex-1">                                    <button className="w-full bg-gradient-to-r from-[#22c55e] to-emerald-500 text-white font-bold py-4 px-8 rounded-xl hover:from-emerald-600 hover:to-[#1e3a8a] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                                     Order Now - Start Your Journey
                                 </button>
                             </a>
@@ -560,22 +695,54 @@ const UrgencyAndVideoSection = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Two Column Layout */}
-                <div className="flex flex-col lg:flex-row gap-8 items-center">
-                    {/* Left Column - Video */}
-                    <div className="w-full lg:w-1/2">
-                        <div className="text-center lg:text-left mb-8">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                                    See Real Results
-                                </span>
-                            </h2>
+                {/* Results Section */}
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                        <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                            Proven Results
+                        </span>
+                    </h2>
+                    <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+                        See how D-52 has helped thousands maintain healthy blood sugar levels naturally
+                    </p>
+                </div>
+
+                {/* Two Column Layout for Video and Chart */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    {/* Chart Column */}
+                    <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 border border-blue-200/20">
+                        <h3 className="text-xl font-semibold text-blue-100 mb-4">Blood Sugar Level Improvement</h3>
+                        <div className=" relative">
+                            <img 
+                                src={chart} 
+                                alt="Blood Sugar Level Chart showing improvement over 30 days"
+                                className="w-full h-full object-contain rounded-xl"
+                            />
                         </div>
-                        
-                        <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-200/20 p-2 sm:p-4 overflow-hidden group transition-all duration-300 hover:shadow-blue-400/30">
+                        <div className="mt-4 text-blue-100 text-sm">
+                            <ul className="space-y-2">
+                                <li className="flex items-center gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    Average 35% reduction in blood sugar levels
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    Sustained improvement over 30 days
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <span className="text-green-400">✓</span>
+                                    95% of users report better glucose control
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Video Column */}
+                    <div className="space-y-6">
+                        <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-2 sm:p-4 border border-blue-200/20 overflow-hidden group transition-all duration-300 hover:shadow-blue-400/30">
                             {/* Animated Border */}
                             <div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-hover:shadow-lg transition-all duration-300" style={{zIndex:2}}></div>
-                            {/* Video Iframe */}
+                            {/* Video Container */}
                             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl border border-white/10">
                                 <iframe
                                     className="w-full h-full"
@@ -588,92 +755,27 @@ const UrgencyAndVideoSection = () => {
                                 ></iframe>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Right Column - Urgency */}
-                    <div className="w-full lg:w-1/2">
-                        <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-6 lg:p-8">
-                            {/* Header */}
-                            <div className="text-center mb-8">
-                                <div className="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full px-5 py-2 shadow-lg mb-4">
-                                    <span className="font-bold tracking-wide">LIMITED TIME OFFER</span>
-                                </div>
-                                <h2 className="text-3xl font-extrabold text-white mb-2 drop-shadow">Special Deal Ends Soon!</h2>
-                            </div>
-
-                            {/* Timer */}
-                            <div className="mb-8">
-                                <h3 className="text-white font-semibold text-lg mb-3 text-center">Time Left</h3>
-                                <div className="flex justify-center space-x-2">
-                                    <div className="bg-white/80 rounded-xl p-3 text-center shadow min-w-[70px]">
-                                        <div className="text-2xl font-bold text-blue-700">{String(timeLeft.hours).padStart(2, '0')}</div>
-                                        <div className="text-xs text-gray-600">HRS</div>
-                                    </div>
-                                    <div className="bg-white/80 rounded-xl p-3 text-center shadow min-w-[70px]">
-                                        <div className="text-2xl font-bold text-blue-700">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                                        <div className="text-xs text-gray-600">MIN</div>
-                                    </div>
-                                    <div className="bg-white/80 rounded-xl p-3 text-center shadow animate-pulse min-w-[70px]">
-                                        <div className="text-2xl font-bold text-blue-700">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                                        <div className="text-xs text-gray-600">SEC</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Price and Stock */}
-                            <div className="text-center mb-8">
-                                <div className="mb-4">
-                                    <div className="text-4xl font-extrabold text-purple-200">₹3,990</div>
-                                    <div className="text-lg text-white/70 line-through">₹6,990</div>
-                                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold inline-block mt-2 shadow">
-                                        Save 43%
-                                    </div>
-                                </div>
-
-                                {/* Stock Alert */}
-                                <div className="bg-gradient-to-r from-blue-600/80 to-purple-600/80 border border-blue-300/30 rounded-xl p-3 mt-4">
-                                    <div className="text-white font-semibold text-sm flex items-center justify-center gap-2">
-                                        <span className="animate-bounce">🔥</span> Only {stockCount} left at this price!
-                                    </div>
-                                    <div className="w-full bg-white/20 rounded-full h-2 mt-2">
-                                        <div 
-                                            className="bg-gradient-to-r from-cyan-400 to-purple-400 h-2 rounded-full transition-all duration-1000"
-                                            style={{ width: `${Math.min(100, (stockCount / 100) * 100)}%` }}
-                                        ></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* CTA */}
-                            <div>
-                                <div className="flex justify-center gap-4 mb-4">
-                                    <div className="flex items-center gap-2 text-white/90">
-                                        <span>🚚</span>
-                                        <span>FREE Shipping</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-white/90">
-                                        <span>🛡️</span>
-                                        <span>Money-Back Guarantee</span>
-                                    </div>
-                                </div>
-                                <a href="/product" className="block">
-                                    <button className="w-full bg-white text-black font-bold py-4 px-6 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                                        <img src={buy} alt="Buy Now" className="w-14 inline-block mr-2" />
-                                        Claim Your Discount Now
-                                    </button>
-                                </a>
+                        {/* Customer Quote */}
+                        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-blue-200/20">
+                            <blockquote className="text-blue-100 italic">
+                                "Within just a month of using D-52, my blood sugar levels stabilized significantly. I feel more energetic and confident about my health."
+                            </blockquote>
+                            <div className="mt-2 text-sm text-blue-200">
+                                - Ramesh K., Verified User
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <style jsx>{`
-                .group:hover .animate-pulse {
-                    animation-play-state: paused;
-                }
-            `}</style>
-            <div>
-                <img src={banner3} alt="Banner 3" className="w-full h-auto" />
+
+                {/* CTA Section */}
+                <div className="mt-12 text-center">
+                    <a href="/product" className="inline-block">
+                        <button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-4 px-8 rounded-xl hover:from-blue-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                            Start Your Journey to Better Health
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     );
