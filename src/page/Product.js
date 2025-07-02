@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import product1 from '../assets/imagess/1.webp';
 import product2 from '../assets/imagess/3.webp';
 import product3 from '../assets/imagess/2.webp';
@@ -79,6 +80,170 @@ const Product = ({ translations, currentLang }) => {
 
     return (
         <div className="w-full min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-cyan-100 flex flex-col items-center justify-center py-16 px-2 pb-20 md:pb-16">
+            <Helmet>
+                <title>D-52 Natural Diabetes Support - Blood Sugar Management Supplement</title>
+                <meta name="description" content="D-52 is a natural Ayurvedic herbal formula for diabetes support. Helps regulate blood sugar levels, boost energy, and support liver function. 100% herbal, AYUSH certified." />
+                <meta name="keywords" content="diabetes supplement, blood sugar control, ayurvedic diabetes medicine, natural diabetes support, herbal diabetes treatment, D-52" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href="https://d-52.com/products/d-52-diabetes-support" />
+                <script type="application/ld+json">
+                    {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Product",
+                        "name": "D-52 Natural Diabetes Support Supplement",
+                        "alternateName": "D-52 Herbal Formula for Blood Sugar Management",
+                        "image": [
+                            "https://d-52.com${product1}",
+                            "https://d-52.com${product2}",
+                            "https://d-52.com${product3}"
+                        ],
+                        "description": "D-52 is a powerful Ayurvedic blend that helps manage blood sugar levels naturally. Just 5 drops in water, morning and evening before food, supports healthy glucose metabolism, energy levels, and liver function—without any side effects. AYUSH certified and 100% herbal formula.",
+                        "brand": {
+                            "@type": "Brand",
+                            "name": "D-52"
+                        },
+                        "manufacturer": {
+                            "@type": "Organization",
+                            "name": "D-52 Health Solutions"
+                        },
+                        "category": "Health & Personal Care > Diabetes Support > Blood Sugar Supplements",
+                        "gtin": "8901234567891",
+                        "mpn": "D52-BS-30ML",
+                        "sku": "D52001",
+                        "weight": {
+                            "@type": "QuantitativeValue",
+                            "value": "150",
+                            "unitCode": "GRM"
+                        },
+                        "offers": {
+                            "@type": "Offer",
+                            "url": "https://d-52.com/products/d-52-diabetes-support",
+                            "priceCurrency": "INR",
+                            "price": "3990",
+                            "priceValidUntil": "2025-12-31",
+                            "itemCondition": "https://schema.org/NewCondition",
+                            "availability": "https://schema.org/InStock",
+                            "shippingDetails": {
+                                "@type": "OfferShippingDetails",
+                                "shippingRate": {
+                                    "@type": "MonetaryAmount",
+                                    "value": "0",
+                                    "currency": "INR"
+                                },
+                                "deliveryTime": {
+                                    "@type": "ShippingDeliveryTime",
+                                    "handlingTime": {
+                                        "@type": "QuantitativeValue",
+                                        "minValue": "1",
+                                        "maxValue": "2",
+                                        "unitCode": "DAY"
+                                    },
+                                    "transitTime": {
+                                        "@type": "QuantitativeValue",
+                                        "minValue": "3",
+                                        "maxValue": "7",
+                                        "unitCode": "DAY"
+                                    }
+                                }
+                            },
+                            "seller": {
+                                "@type": "Organization",
+                                "name": "D-52",
+                                "url": "https://d-52.com"
+                            }
+                        },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.9",
+                            "reviewCount": "5000",
+                            "bestRating": "5",
+                            "worstRating": "1"
+                        },
+                        "additionalProperty": [
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Dosage",
+                                "value": "5 drops in water, twice daily"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Pack Size",
+                                "value": "5 mini bottles per box"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Form",
+                                "value": "Liquid drops"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Certification",
+                                "value": "AYUSH Certified"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Primary Benefit",
+                                "value": "Blood sugar regulation"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Secondary Benefits",
+                                "value": "Energy support, liver detox, digestion"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Usage Duration",
+                                "value": "30 days supply"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Side Effects",
+                                "value": "None reported"
+                            }
+                        ],
+                        "audience": {
+                            "@type": "PeopleAudience",
+                            "suggestedMinAge": "18"
+                        },
+                        "potentialAction": {
+                            "@type": "BuyAction",
+                            "target": "https://d-52.com/checkout"
+                        },
+                        "isRelatedTo": [
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Type 2 Diabetes"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Blood Sugar Imbalance"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Metabolic Disorders"
+                            }
+                        ],
+                        "hasMedicalIndication": [
+                            {
+                                "@type": "MedicalIndication",
+                                "name": "Blood glucose management"
+                            },
+                            {
+                                "@type": "MedicalIndication",
+                                "name": "Metabolic support"
+                            }
+                        ],
+                        "activeIngredient": [
+                            {
+                                "@type": "ChemicalSubstance",
+                                "name": "Ayurvedic herbal extracts"
+                            }
+                        ]
+                    }
+                    `}
+                </script>
+            </Helmet>
             {/* Sticky CTA Bar */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-green-500 shadow-2xl z-50 p-3 md:hidden">
                 <div className="flex items-center justify-between gap-3">

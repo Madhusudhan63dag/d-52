@@ -126,7 +126,7 @@ export const translations = {
         {
           image: four,
           text: "I didn’t expect much from herbal drops, but D-52 proved me wrong. I feel much better overall and my blood reports look more promising now.",
-          name: 'ALKA MEHRA',
+          name: 'SIDDHARTH',
           role: 'Retired Banker',
           rating: 5,
           location: 'Delhi NCR',
