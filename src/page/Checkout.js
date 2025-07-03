@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import card1 from '../assets/card1.webp'
+import card2 from '../assets/card2.webp'
+import card3 from '../assets/card3.webp'
+import card4 from '../assets/card4.webp'
+import stamp1 from '../assets/stamp1.webp'
+import stamp2 from '../assets/stamp2.webp'
+import stamp3 from '../assets/stamp3.webp'
 
 // API base URL that works in both development and production environments
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
@@ -7,7 +14,7 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
     : 'https://d-52-api.onrender.com';
 
 const COUNTRY_CURRENCY_MAP = {
-    'India': { currency: 'INR', symbol: '₹', rate: 1, basePrice: 3990 },
+    'India': { currency: 'INR', symbol: '₹', rate: 1, basePrice: 10 },
     'United States': { currency: 'USD', symbol: '$', rate: 1, basePrice: 120 }
 };
 
@@ -444,186 +451,272 @@ const Checkout = ({ translations, currentLang }) => {
     );
 
     const renderOrderSummary = () => (
-        <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6" >
-                {translations[currentLang].checkout.order}
-            </h2>
-
-            {/* Trust Indicators */}
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                <div className="flex items-center space-x-2 mb-3">
-                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+        <div className="glass-effect rounded-2xl p-8 floating-card">
+            <div className="flex items-center space-x-3 mb-8">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
-                    <span className="font-semibold text-green-800">Secure Checkout</span>
                 </div>
-                <div className="grid grid-cols-1 gap-2 text-sm text-gray-700">
-                    <div className="flex items-center space-x-2 mb-3">
-                        <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                    {translations[currentLang].checkout.order}
+                </h2>
+            </div>
+
+            {/* Enhanced Trust Indicators */}
+            <div className="gradient-border rounded-xl p-6 mb-8 shimmer-effect">
+                <div className="flex items-center space-x-3 mb-4">
+                    <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center pulse-gentle">
+                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        <span>SSL Encrypted</span>
                     </div>
-                    <div className="flex items-center space-x-2 mb-3">
-                        <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span>Also available on Amazon</span>
+                    <span className="text-xl font-bold bg-gradient-to-r from-green-700 to-emerald-700 bg-clip-text text-transparent">
+                        Secure Checkout
+                    </span>
+                </div>
+                
+                <div className="grid grid-cols-1 gap-4">
+                    <div className="flex items-center space-x-3 p-3 bg-blue-50/50 rounded-lg border border-blue-100">
+                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <span className="font-medium text-gray-700">SSL Encrypted & Bank-Level Security</span>
                     </div>
-                    <div className="flex items-center space-x-2 mb-3">
-                        <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span>Money-back guarantee</span>
+                    
+                    <div className="flex items-center space-x-3 p-3 bg-green-50/50 rounded-lg border border-green-100">
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <span className="font-medium text-gray-700">100% Money-Back Guarantee</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-3 p-3 bg-purple-50/50 rounded-lg border border-purple-100">
+                        <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
+                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <span className="font-medium text-gray-700">Fast & Secure Delivery</span>
                     </div>
                 </div>
             </div>
 
-            <div className="space-y-4">
-                {/* <div className="flex justify-between py-2 border-t border-gray-200">
-                    <label className="text-gray-700">
-                        Promo Code
-                    </label>
-                    <input
-                        type="text"
-                        value={promoCode}
-                        onChange={(e) => setPromoCode(e.target.value)}
-                        className="w-2/3 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    />
-                    <button
-                        type="button"
-                        onClick={handlePromoCodeApply}
-                        className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-lg"
-                    >
-                        Apply
-                    </button>
-                </div>
-                {formErrors.promoCode && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.promoCode}</p>
-                )} */}
+            {/* Enhanced Order Details */}
+            <div className="space-y-6">
+                <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 border border-gray-200">
+                    <div className="flex justify-between items-center font-medium pb-4 border-b border-gray-300">
+                        <span className="text-gray-700 flex items-center space-x-2">
+                            <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                            <span>{translations[currentLang].checkout.product}</span>
+                        </span>
+                        <span className="text-gray-700">{translations[currentLang].checkout.subtotal}</span>
+                    </div>
 
-                {/* Alternative Purchase Options */}
-                {/* <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                    <h4 className="font-semibold text-gray-800 mb-2">Alternative Purchase Options</h4>
-                    <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2">
-                                <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
-                                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M13.12 2.06L7.58 7.6c-.37.37-.58.88-.58 1.41V19c0 1.1.9 2 2 2h9c.8 0 1.52-.48 1.84-1.21l3.26-7.61C23.94 10.2 22.49 8 20.34 8H14.5l1.76-5.24c.15-.45-.24-.81-.69-.81-.23 0-.45.09-.61.24z"/>
-                                    </svg>
-                                </div>
-                                <span className="text-sm text-gray-700">Amazon Prime eligible</span>
+                    {/* <div className="flex justify-between items-center py-4">
+                        <div className="flex items-center space-x-4">
+                            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                             </div>
-                            <a href={userCountry === 'USD' ? "https://www.amazon.in/D-52-Natural-Diabetes-Support/dp/B0B28KXNL7" : "https://www.amazon.in/D-52-Natural-Diabetes-Support/dp/B0B28KXNL7"} id="amazon" className="amazon text-xs text-orange-600 underline">View on Amazon</a>
-                        </div>                            <p className="text-xs text-gray-600">Same D-52 product, multiple trusted platforms</p>
+                            <div>
+                                <h3 className="font-semibold text-gray-800">{orderDetails?.productName}</h3>
+                                <p className="text-sm text-gray-600">Quantity: {orderDetails?.quantity}</p>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <div className="flex items-center space-x-2">
+                                <span className="line-through text-gray-400 text-sm">
+                                    {currentCurrency.symbol} {(currentCurrency.basePrice * 1.75 * orderDetails.quantity).toFixed(2)}
+                                </span>
+                                <span className="font-bold text-green-600 text-lg">
+                                    {currentCurrency.symbol} {convertedAmount}
+                                </span>
+                            </div>
+                            <div className="text-xs text-green-600 font-medium">You save 43%!</div>
+                        </div>
+                    </div> */}
+                </div>
+
+                {/* Pricing Breakdown */}
+                <div className="space-y-4">
+                    <div className="flex justify-between py-3 border-b border-gray-200">
+                        <span className="font-medium text-gray-700">{translations[currentLang].checkout.subtotal}</span>
+                        <span className="text-gray-700">{currentCurrency.symbol} {convertedAmount}</span>
                     </div>
-                </div> */}
 
-                {/* Rest of the order summary */}
-                <div className="flex justify-between py-4 border-t border-gray-200">
-                    <span className="text-lg font-bold text-gray-800">
-                        {translations[currentLang].checkout.total}
-                    </span>
-                    <span className="text-lg font-bold text-gray-800">
-                        {currentCurrency.symbol} {convertedAmount}
-                    </span>
-                </div>
-            </div>
-            <div className="space-y-4">
-                <div className="flex justify-between font-medium pb-4 border-b border-gray-200">
-                    <span className="text-gray-600">{translations[currentLang].checkout.product}</span>
-                    <span className="text-gray-600">{translations[currentLang].checkout.subtotal}</span>
-                </div>
+                    <div className="flex justify-between py-3 border-b border-gray-200">
+                        <span className="font-medium text-gray-700 flex items-center space-x-2">
+                            <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                            <span>{translations[currentLang].checkout.shipping}</span>
+                        </span>
+                        <div className='text-right'>
+                            <div className="text-green-600 font-medium">FREE</div>
+                            <div className="text-xs text-gray-500">(5-7 business days)</div>
+                        </div>
+                    </div>
 
-                <div className="flex justify-between py-2">
-                    <span className="text-gray-700">{orderDetails?.productName} x {orderDetails?.quantity}</span>
-                    <span className="text-gray-700">
-                        <span className="line-through">{currentCurrency.symbol} {(currentCurrency.basePrice * 1.75 * orderDetails.quantity).toFixed(2)}</span> {currentCurrency.symbol} {convertedAmount}
-                    </span>
-                </div>
-
-                <div className="flex justify-between py-2 border-t border-gray-200">
-                    <span className="font-medium text-gray-700">{translations[currentLang].checkout.subtotal}</span>
-                    <span className="text-gray-700">{currentCurrency.symbol} {convertedAmount}</span>
-                </div>
-
-                <div className="flex justify-between py-2 border-t border-gray-200">
-                    <span className="font-medium text-gray-700">{translations[currentLang].checkout.shipping}</span>
-                    <div className='flex flex-col items-end'>
-                        <span className="text-green-600">Free</span>
-                        <span className="text-green-600"> (Delivery within 5-7 business days)</span>
+                    <div className="flex justify-between py-4 border-t-2 border-gray-300 bg-gradient-to-r from-blue-50 to-purple-50 px-4 rounded-lg">
+                        <span className="text-xl font-bold text-gray-800">{translations[currentLang].checkout.total}</span>
+                        <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            {currentCurrency.symbol} {convertedAmount}
+                        </span>
                     </div>
                 </div>
 
-                <div className="flex justify-between py-4 border-t border-gray-200">
-                    <span className="text-lg font-bold text-gray-800">{translations[currentLang].checkout.total}</span>
-                    <span className="text-lg font-bold text-gray-800">
-                        {currentCurrency.symbol} {convertedAmount}
-                    </span>
-                </div>
-
-                <div className="pt-4 space-y-3">
-                    <label className="block text-sm font-medium text-gray-700">
-                        {translations[currentLang].checkout.mode}<span className="text-red-500">*</span>
+                {/* Payment Method Selection */}
+                <div className="space-y-4">
+                    <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                        <span>{translations[currentLang].checkout.mode}<span className="text-red-500">*</span></span>
                     </label>
                     <select
                         name="paymentMode"
                         value={formData.paymentMode}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 hover:border-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50 transition-all duration-300"
                     >
                         <option value="">Select Payment Method</option>
                         {userCountry === 'India' && <option value="cod">Cash on Delivery (COD)</option>}
-                        <option value="online">Online Payment</option>
+                        <option value="online">Online Payment (Card/UPI/Wallet)</option>
                     </select>
                     {formErrors.paymentMode && (
-                        <p className="text-red-500 text-sm">{formErrors.paymentMode}</p>
+                        <p className="text-red-500 text-sm flex items-center space-x-1">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                            <span>{formErrors.paymentMode}</span>
+                        </p>
                     )}
+                    
+                    {/* Trusted Payment Methods */}
+                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                        <h4 className="text-sm font-medium text-gray-700 mb-3">Accepted Payment Methods</h4>
+                        <div className="grid grid-cols-4 gap-3">
+                            {/* Visa */}
+                            <div className="bg-white rounded-lg p-3 border border-gray-200 flex items-center justify-center">
+                                <img src={card1} class />
+                            </div>
+                            
+                            {/* Mastercard */}
+                            <div className="bg-white rounded-lg p-3 border border-gray-200 flex items-center justify-center">
+                            <img src={card2} class />                                
+                            </div>
+                            
+                            {/* RuPay (for India) */}
+                            {userCountry === 'India' && (
+                                <div className="bg-white rounded-lg p-3 border border-gray-200 flex items-center justify-center">
+                                    <img src={card3} className="w-12 h-8" alt="RuPay" />
+                                </div>
+                            )}
+                            
+                            {/* UPI (for India) */}
+                            {userCountry === 'India' && (
+                                <div className="bg-white rounded-lg p-3 border border-gray-200 flex items-center justify-center">
+                                    <img src={card4} className="w-12 h-8" alt="UPI" />
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
 
+                {/* Enhanced Submit Button */}
                 <button
                     type="submit"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg
-                        transition-all duration-200 transform hover:scale-105
-                        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl
+                        transition-all duration-300 transform hover:scale-105 hover:shadow-2xl
+                        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
+                        relative overflow-hidden group"
                 >
-                    {isSubmitting ? (
-                        <div className="flex items-center justify-center">
-                            <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                            </svg>
-                            {translations[currentLang].checkout.processing}
-
-                        </div>
-                    ) : (
-                        translations[currentLang].checkout.order
-                    )}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <span className="relative z-10 flex items-center justify-center space-x-3">
+                        {isSubmitting ? (
+                            <>
+                                <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
+                                <span className="text-lg">{translations[currentLang].checkout.processing}</span>
+                            </>
+                        ) : (
+                            <>
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span className="text-lg">{translations[currentLang].checkout.order}</span>
+                            </>
+                        )}
+                    </span>
                 </button>
 
-                {/* Additional Trust Elements */}
-                <div className="grid grid-cols-3 gap-2 pt-4 text-center text-xs text-gray-600">
-                    <div className="flex flex-col items-center">
-                        <svg className="w-6 h-6 text-green-600 mb-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                        </svg>
-                        <span>Secure Payment</span>
+                {/* Enhanced Trust Elements */}
+                <div className="grid grid-cols-3 gap-4 pt-6">
+                    <div className="flex flex-col items-center text-center p-4 rounded-xl">
+                        <img src={stamp1}  />
+                        {/* <h4 className="font-semibold text-gray-800 text-sm mb-1">Secure Payment</h4> */}
+                        {/* <p className="text-xs text-gray-600">Bank-level security</p> */}
                     </div>
-                    <div className="flex flex-col items-center">
-                        <svg className="w-6 h-6 text-blue-600 mb-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
-                            <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"/>
-                        </svg>
-                        <span>Fast Delivery</span>
+                    
+                    <div className="flex flex-col items-center text-center p-4 rounded-xl">
+                        <img src={stamp2} />
                     </div>
-                    <div className="flex flex-col items-center">
-                        <svg className="w-6 h-6 text-yellow-600 mb-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    
+                    {/* <div className="flex flex-col items-start text-start p-4 rounded-xl">
+                        <img src={stamp3} />
+                    </div> */}
+                </div>
+                
+                {/* Company Verification */}
+                <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 mt-4">
+                    <h4 className="text-sm font-medium text-gray-700 mb-3 flex items-center space-x-2">
+                        <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        <span>4.8★ Rating</span>
+                        <span>Verified Company</span>
+                    </h4>
+                    <div className="grid grid-cols-2 gap-3">
+                        <div className="flex items-center space-x-2">
+                            <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                            <span className="text-xs text-gray-600">Business Verified</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                            <span className="text-xs text-gray-600">GST Registered</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                            <span className="text-xs text-gray-600">Licensed Seller</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <div className="w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                            <span className="text-xs text-gray-600">ISO Certified</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -679,58 +772,334 @@ const Checkout = ({ translations, currentLang }) => {
         return null; // Return null since we're navigating away
     }
     return (
-        <div className="max-w-7xl mx-auto px-4">
-            {formErrors.submit && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg mb-8">
-                    {formErrors.submit}
+        <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100 py-8">
+            <style jsx>{`
+                @keyframes fadeInUp {
+                    0% { opacity: 0; transform: translateY(30px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+                
+                @keyframes slideInLeft {
+                    0% { opacity: 0; transform: translateX(-30px); }
+                    100% { opacity: 1; transform: translateX(0); }
+                }
+                
+                @keyframes slideInRight {
+                    0% { opacity: 0; transform: translateX(30px); }
+                    100% { opacity: 1; transform: translateX(0); }
+                }
+                
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                }
+                
+                @keyframes shimmer {
+                    0% { background-position: -200% 0; }
+                    100% { background-position: 200% 0; }
+                }
+                
+                .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+                .slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
+                .slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+                .pulse-gentle { animation: pulse 2s ease-in-out infinite; }
+                
+                .glass-effect {
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(20px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                }
+                
+                .gradient-border {
+                    position: relative;
+                    background: linear-gradient(white, white) padding-box,
+                                linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4) border-box;
+                    border: 2px solid transparent;
+                }
+                
+                .shimmer-effect {
+                    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+                    background-size: 200% 100%;
+                    animation: shimmer 2s infinite;
+                }
+                
+                .floating-card {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                
+                .floating-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                }
+            `}</style>
+
+            <div className="max-w-7xl mx-auto px-4">
+                {/* Header Section */}
+                <div className="text-center mb-12 fade-in-up">
+                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+                        Secure Checkout
+                    </h1>
+                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                        Complete your order with confidence. Your information is protected with bank-level security.
+                    </p>
                 </div>
-            )}
 
-            <div className="grid lg:grid-cols-2 gap-12">
-                <div className="space-y-8">
-                    <div className="bg-white rounded-lg shadow-lg p-6">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                            {translations[currentLang].checkout.sectitle}
-                        </h2>
-
-                        <div className="space-y-6">
-                            <div className="grid grid-cols-2 gap-4">
-                                {renderFormField("firstName", translations[currentLang].checkout.firstname)}
-                                {renderFormField("lastName", translations[currentLang].checkout.lastname)}
-                            </div>
-                            <div className="space-y-2">
-                                <label className="block text-sm font-medium text-gray-700">
-                                    {translations[currentLang].checkout.country}<span className="text-red-500">*</span>
-                                </label>
-                                <select
-                                    name="country"
-                                    value={formData.country}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    disabled={isLoadingLocation}
-                                >
-                                    {getAvailableCountries().map(country => (
-                                        <option key={country} value={country}>
-                                            {country} ({COUNTRY_CURRENCY_MAP[country].currency})
-                                        </option>
-                                    ))}
-                                </select>
-                                {isLoadingLocation && (
-                                    <p className="text-sm text-gray-500">Detecting your location...</p>
-                                )}
-                            </div>
-
-                            {renderFormField("streetAddress", translations[currentLang].checkout.address)}
-                            {renderFormField("apartment", translations[currentLang].checkout.clientaddress, "text", false)}
-                            {renderFormField("townCity", translations[currentLang].checkout.city)}
-                            {renderFormField("phone", translations[currentLang].checkout.phone, "tel")}
-                            {renderFormField("email", translations[currentLang].checkout.email, "email")}
+                {formErrors.submit && (
+                    <div className="glass-effect border-red-200 text-red-700 px-6 py-4 rounded-xl mb-8 fade-in-up">
+                        <div className="flex items-center space-x-2">
+                            <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                            <span>{formErrors.submit}</span>
                         </div>
                     </div>
-                </div>
+                )}
 
-                <div>
-                    {renderOrderSummary()}
+                <div className="grid lg:grid-cols-2 gap-12">
+                    <div className="space-y-8 slide-in-left">
+                        <div className="glass-effect rounded-2xl p-8 floating-card">
+                            <div className="flex items-center space-x-3 mb-8">
+                                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </div>
+                                <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                                    {translations[currentLang].checkout.sectitle}
+                                </h2>
+                            </div>
+
+                            <div className="space-y-6">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                            <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                            <span>{translations[currentLang].checkout.firstname} <span className="text-red-500">*</span></span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="firstName"
+                                            value={formData.firstName}
+                                            onChange={handleInputChange}
+                                            className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 ${
+                                                formErrors.firstName 
+                                                    ? 'border-red-500 focus:border-red-500' 
+                                                    : 'border-gray-200 focus:border-blue-500 hover:border-blue-300'
+                                            } focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50`}
+                                            placeholder="Enter your first name"
+                                        />
+                                        {formErrors.firstName && (
+                                            <p className="text-red-500 text-sm mt-1 flex items-center space-x-1">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                </svg>
+                                                <span>{formErrors.firstName}</span>
+                                            </p>
+                                        )}
+                                    </div>
+                                    
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                            <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                            <span>{translations[currentLang].checkout.lastname} <span className="text-red-500">*</span></span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="lastName"
+                                            value={formData.lastName}
+                                            onChange={handleInputChange}
+                                            className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 ${
+                                                formErrors.lastName 
+                                                    ? 'border-red-500 focus:border-red-500' 
+                                                    : 'border-gray-200 focus:border-blue-500 hover:border-blue-300'
+                                            } focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50`}
+                                            placeholder="Enter your last name"
+                                        />
+                                        {formErrors.lastName && (
+                                            <p className="text-red-500 text-sm mt-1 flex items-center space-x-1">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                </svg>
+                                                <span>{formErrors.lastName}</span>
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                                
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span>{translations[currentLang].checkout.country}<span className="text-red-500">*</span></span>
+                                    </label>
+                                    <select
+                                        name="country"
+                                        value={formData.country}
+                                        onChange={handleInputChange}
+                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 hover:border-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50 transition-all duration-300"
+                                        disabled={isLoadingLocation}
+                                    >
+                                        {getAvailableCountries().map(country => (
+                                            <option key={country} value={country}>
+                                                {country} ({COUNTRY_CURRENCY_MAP[country].currency})
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {isLoadingLocation && (
+                                        <p className="text-sm text-gray-500 flex items-center space-x-2">
+                                            <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-500 border-t-transparent"></div>
+                                            <span>Detecting your location...</span>
+                                        </p>
+                                    )}
+                                </div>
+
+                                {/* Enhanced form fields for address, phone, email */}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        <span>{translations[currentLang].checkout.address} <span className="text-red-500">*</span></span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="streetAddress"
+                                        value={formData.streetAddress}
+                                        onChange={handleInputChange}
+                                        className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 ${
+                                            formErrors.streetAddress 
+                                                ? 'border-red-500 focus:border-red-500' 
+                                                : 'border-gray-200 focus:border-blue-500 hover:border-blue-300'
+                                        } focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50`}
+                                        placeholder="Enter your street address"
+                                    />
+                                    {formErrors.streetAddress && (
+                                        <p className="text-red-500 text-sm mt-1 flex items-center space-x-1">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                            <span>{formErrors.streetAddress}</span>
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                        </svg>
+                                        <span>{translations[currentLang].checkout.clientaddress}</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="apartment"
+                                        value={formData.apartment}
+                                        onChange={handleInputChange}
+                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 hover:border-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50 transition-all duration-300"
+                                        placeholder="Apartment, suite, etc. (optional)"
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                        </svg>
+                                        <span>{translations[currentLang].checkout.city} <span className="text-red-500">*</span></span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="townCity"
+                                        value={formData.townCity}
+                                        onChange={handleInputChange}
+                                        className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 ${
+                                            formErrors.townCity 
+                                                ? 'border-red-500 focus:border-red-500' 
+                                                : 'border-gray-200 focus:border-blue-500 hover:border-blue-300'
+                                        } focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50`}
+                                        placeholder="Enter your city"
+                                    />
+                                    {formErrors.townCity && (
+                                        <p className="text-red-500 text-sm mt-1 flex items-center space-x-1">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                            <span>{formErrors.townCity}</span>
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                        </svg>
+                                        <span>{translations[currentLang].checkout.phone} <span className="text-red-500">*</span></span>
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleInputChange}
+                                        className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 ${
+                                            formErrors.phone 
+                                                ? 'border-red-500 focus:border-red-500' 
+                                                : 'border-gray-200 focus:border-blue-500 hover:border-blue-300'
+                                        } focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50`}
+                                        placeholder="Enter your phone number"
+                                    />
+                                    {formErrors.phone && (
+                                        <p className="text-red-500 text-sm mt-1 flex items-center space-x-1">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                            <span>{formErrors.phone}</span>
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                        <span>{translations[currentLang].checkout.email} <span className="text-red-500">*</span></span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 ${
+                                            formErrors.email 
+                                                ? 'border-red-500 focus:border-red-500' 
+                                                : 'border-gray-200 focus:border-blue-500 hover:border-blue-300'
+                                        } focus:outline-none focus:ring-4 focus:ring-blue-100 bg-white/50`}
+                                        placeholder="Enter your email address"
+                                    />
+                                    {formErrors.email && (
+                                        <p className="text-red-500 text-sm mt-1 flex items-center space-x-1">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                            <span>{formErrors.email}</span>
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="slide-in-right">
+                        {renderOrderSummary()}
+                    </div>
                 </div>
             </div>
         </div>

@@ -399,12 +399,11 @@ const Product = ({ currentLang, translations }) => {
                                 
                                 {/* Product Badge */}
                                 <div className="absolute top-4 right-4 bg-gradient-to-r from-[#f59e0b] to-amber-500 text-white px-4 py-2 rounded-full shadow-lg">
-                                    <span className="font-bold text-sm">✨ Premium Quality</span>
+                                    <span className="font-bold text-sm">Premium Quality</span>
                                 </div>
                                 
                                 {/* Trust Badges */}
                                 <div className="absolute bottom-4 left-4 flex space-x-2">
-                                    <div className="bg-[#1e3a8a] text-white px-3 py-1 rounded-full text-xs font-semibold">FDA Approved</div>
                                     <div className="bg-[#22c55e] text-white px-3 py-1 rounded-full text-xs font-semibold">100% Natural</div>
                                 </div>
                             </div>

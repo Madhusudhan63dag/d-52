@@ -76,7 +76,7 @@ const Product = ({ translations, currentLang }) => {
         });
     };
 
-    const productImages = [product1, product2, product3];
+    const productImages = [product2, product3];
 
     return (
         <div className="w-full min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-cyan-100 flex flex-col items-center justify-center py-16 px-2 pb-20 md:pb-16">
@@ -300,7 +300,7 @@ const Product = ({ translations, currentLang }) => {
                     </div>
                 </div>
                 <div className="text-xs text-red-600 font-medium text-center mt-2">
-                    🔥 Only {stockCount} boxes left at this price!
+                    Only {stockCount} boxes left at this price!
                 </div>
             </div>
 
@@ -374,7 +374,7 @@ const Product = ({ translations, currentLang }) => {
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-red-700 font-bold text-sm">
-                                🔥 Only {stockCount} boxes left at this price!
+                                Only {stockCount} boxes left at this price!
                             </span>
                             <div className="bg-red-600 text-white px-3 py-1 rounded-lg font-mono font-bold text-sm">
                                 {String(timeLeft.hours).padStart(2, '0')}:
@@ -436,9 +436,6 @@ const Product = ({ translations, currentLang }) => {
                         className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-lg mb-2 relative"
                     >
                         <span className="relative z-10">Order Now</span>
-                        <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-xl font-bold">
-                            SAVE 33%
-                        </div>
                     </button>
 
                     {/* Trust & Scarcity Signals */}
@@ -480,37 +477,71 @@ const Product = ({ translations, currentLang }) => {
 
             </div>
 
-            {/* Lifestyle Section - High Up */}
-            <div className="w-full mt-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl shadow-lg overflow-hidden">
-                <div className="max-w-6xl mx-auto p-8">
-                    <div className="flex flex-col md:flex-row items-center gap-8">
-                        <div className="md:w-1/2">
-                            <img 
-                                src={lifestyleImage} 
-                                alt="Happy couple living healthy lifestyle with D-52" 
-                                className="rounded-xl shadow-xl w-full h-auto"
-                            />
-                        </div>
-                        <div className="md:w-1/2 text-center md:text-left">
-                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                                Join thousands of people like you transforming their lives naturally.
-                            </h3>
-                            <p className="text-lg text-gray-700 mb-6">
-                                Experience the confidence that comes with balanced blood sugar levels and renewed energy. 
-                                D-52 helps you take control of your health naturally, so you can focus on what matters most.
-                            </p>
-                            <div className="flex flex-wrap justify-center md:justify-start gap-4 text-green-700 font-semibold">
-                                <div className="flex items-center gap-2">
-                                    <span>✓</span> Natural & Safe
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span>✓</span> Proven Results
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span>✓</span> Doctor Trusted
-                                </div>
+           {/* How to Use Section */}
+           <div className="w-full mt-8 bg-gradient-to-br from-white to-green-50 rounded-2xl shadow-lg overflow-hidden">
+                <div className="max-w-6xl mx-auto">
+                    {/* Header */}
+                    <div className="text-center py-8 px-4">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">How to Use D-52</h2>
+                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Just 5 drops in water twice a day for effective diabetes care
+                    </p>
+                    </div>
+
+                    {/* Timeline Steps */}
+                    <div className="px-4 py-8">
+                    <div className="max-w-4xl mx-auto">
+                        {/* Morning Dose */}
+                        <div className="flex flex-col md:flex-row items-center gap-6 mb-12 relative">
+                        <div className="md:w-1/3 bg-white rounded-xl p-6 shadow-lg border border-green-100">
+                            <div className="text-center">
+                            <span className="text-3xl mb-3">🌅</span>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Morning Dose</h3>
+                            <p className="text-gray-600">Before Breakfast</p>
+                            <div className="mt-4 bg-green-50 rounded-lg p-3">
+                                <p className="text-green-800 font-medium">5 drops in water</p>
+                            </div>
                             </div>
                         </div>
+                        <div className="hidden md:block w-1/3 h-0.5 bg-gradient-to-r from-green-500 to-green-300"></div>
+                        <div className="md:w-1/3 bg-white rounded-xl p-6 shadow-lg border border-green-100">
+                            <div className="text-center">
+                            <span className="text-3xl mb-3">🌙</span>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Evening Dose</h3>
+                            <p className="text-gray-600">Before Dinner</p>
+                            <div className="mt-4 bg-green-50 rounded-lg p-3">
+                                <p className="text-green-800 font-medium">5 drops in water</p>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        {/* Usage Tips */}
+                        <div className="bg-white rounded-xl p-6 shadow-md mt-8">
+                        <h4 className="text-lg font-bold text-gray-900 mb-4">Important Tips for Best Results:</h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="flex items-start gap-3">
+                            <span className="text-green-600 text-xl">•</span>
+                            <p className="text-gray-600">Take on an empty stomach 30 minutes before meals</p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                            <span className="text-green-600 text-xl">•</span>
+                            <p className="text-gray-600">Mix with room temperature or lukewarm water</p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                            <span className="text-green-600 text-xl">•</span>
+                            <p className="text-gray-600">Stick to consistent timings daily</p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                            <span className="text-green-600 text-xl">•</span>
+                            <p className="text-gray-600">Keep bottles in a cool, dry place away from sunlight</p>
+                            </div>
+                        </div>
+                        </div>
+
+                        {/* Warning Note */}
+                        
+                    </div>
                     </div>
                 </div>
             </div>
@@ -520,7 +551,6 @@ const Product = ({ translations, currentLang }) => {
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
                     <div className="text-center py-8 px-4">
-                    <span className="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-semibold mb-4">Ayurvedic Innovation</span>
                     <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Why Choose D-52?</h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                         D-52 combines trusted Ayurvedic herbs with modern formulation practices to deliver a safe and powerful solution for blood sugar management—just 5 drops in water, morning and evening.
@@ -634,75 +664,7 @@ const Product = ({ translations, currentLang }) => {
                 </div>
             </div> */}
 
-            {/* How to Use Section */}
-            <div className="w-full mt-8 bg-gradient-to-br from-white to-green-50 rounded-2xl shadow-lg overflow-hidden">
-                <div className="max-w-6xl mx-auto">
-                    {/* Header */}
-                    <div className="text-center py-8 px-4">
-                    <span className="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold mb-4">Usage Guide</span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">How to Use D-52</h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Just 5 drops in water twice a day for effective diabetes care
-                    </p>
-                    </div>
-
-                    {/* Timeline Steps */}
-                    <div className="px-4 py-8">
-                    <div className="max-w-4xl mx-auto">
-                        {/* Morning Dose */}
-                        <div className="flex flex-col md:flex-row items-center gap-6 mb-12 relative">
-                        <div className="md:w-1/3 bg-white rounded-xl p-6 shadow-lg border border-green-100">
-                            <div className="text-center">
-                            <span className="text-3xl mb-3">🌅</span>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">Morning Dose</h3>
-                            <p className="text-gray-600">Before Breakfast</p>
-                            <div className="mt-4 bg-green-50 rounded-lg p-3">
-                                <p className="text-green-800 font-medium">5 drops in water</p>
-                            </div>
-                            </div>
-                        </div>
-                        <div className="hidden md:block w-1/3 h-0.5 bg-gradient-to-r from-green-500 to-green-300"></div>
-                        <div className="md:w-1/3 bg-white rounded-xl p-6 shadow-lg border border-green-100">
-                            <div className="text-center">
-                            <span className="text-3xl mb-3">🌙</span>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">Evening Dose</h3>
-                            <p className="text-gray-600">Before Dinner</p>
-                            <div className="mt-4 bg-green-50 rounded-lg p-3">
-                                <p className="text-green-800 font-medium">5 drops in water</p>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-
-                        {/* Usage Tips */}
-                        <div className="bg-white rounded-xl p-6 shadow-md mt-8">
-                        <h4 className="text-lg font-bold text-gray-900 mb-4">Important Tips for Best Results:</h4>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <div className="flex items-start gap-3">
-                            <span className="text-green-600 text-xl">•</span>
-                            <p className="text-gray-600">Take on an empty stomach 30 minutes before meals</p>
-                            </div>
-                            <div className="flex items-start gap-3">
-                            <span className="text-green-600 text-xl">•</span>
-                            <p className="text-gray-600">Mix with room temperature or lukewarm water</p>
-                            </div>
-                            <div className="flex items-start gap-3">
-                            <span className="text-green-600 text-xl">•</span>
-                            <p className="text-gray-600">Stick to consistent timings daily</p>
-                            </div>
-                            <div className="flex items-start gap-3">
-                            <span className="text-green-600 text-xl">•</span>
-                            <p className="text-gray-600">Keep bottles in a cool, dry place away from sunlight</p>
-                            </div>
-                        </div>
-                        </div>
-
-                        {/* Warning Note */}
-                        
-                    </div>
-                    </div>
-                </div>
-            </div>
+            
 
         </div>
     );

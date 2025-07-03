@@ -98,7 +98,7 @@ export const translations = {
         {
           image: two,
           text: "I was looking for a natural way to manage my blood sugar. D-52 has helped me feel more balanced and alert. It fits easily into my lifestyle and doesn’t feel like a burden.",
-          name: 'POONAM SINGH',
+          name: 'Dhruv',
           role: 'Yoga Instructor',
           rating: 5,
           location: 'Lucknow, Uttar Pradesh',
