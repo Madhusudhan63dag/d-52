@@ -14,7 +14,7 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
     : 'https://d-52-api.onrender.com';
 
 const COUNTRY_CURRENCY_MAP = {
-    'India': { currency: 'INR', symbol: '₹', rate: 1, basePrice: 10 },
+    'India': { currency: 'INR', symbol: '₹', rate: 1, basePrice: 3990 },
     'United States': { currency: 'USD', symbol: '$', rate: 1, basePrice: 120 }
 };
 

@@ -166,7 +166,7 @@ const Hero = () => {
                     {/* Hero Card */}
                     <div className={`hero-card overflow-hidden ${isLoaded ? 'fade-in-scale' : 'opacity-0'}`}>
                         {/* Banner Images */}
-                        <div className="relative w-full h-[300px] md:h-[500px]">
+                        <div className="relative w-full h-[200px] md:h-[500px]">
                             <div className="w-full h-full image-container image-shimmer relative">
                                 {banners.map((banner, index) => (
                                     <div
@@ -182,7 +182,7 @@ const Hero = () => {
                                         <img
                                             src={isMobile ? banner.mobile : banner.desktop}
                                             alt={`Banner ${index + 1}`}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full"
                                         />
                                     </div>
                                 ))}
@@ -694,48 +694,8 @@ const UrgencyAndVideoSection = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Results Section */}
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                        <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                            Proven Results
-                        </span>
-                    </h2>
-                    <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-                        See how D-52 has helped thousands maintain healthy blood sugar levels naturally
-                    </p>
-                </div>
-
                 {/* Two Column Layout for Video and Chart */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    {/* Chart Column */}
-                    <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 border border-blue-200/20">
-                        <h3 className="text-xl font-semibold text-blue-100 mb-4">Blood Sugar Level Improvement</h3>
-                        <div className=" relative">
-                            <img 
-                                src={chart} 
-                                alt="Blood Sugar Level Chart showing improvement over 30 days"
-                                className="w-full h-full object-contain rounded-xl"
-                            />
-                        </div>
-                        <div className="mt-4 text-blue-100 text-sm">
-                            <ul className="space-y-2">
-                                <li className="flex items-center gap-2">
-                                    <span className="text-green-400">✓</span>
-                                    Average 35% reduction in blood sugar levels
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <span className="text-green-400">✓</span>
-                                    Sustained improvement over 30 days
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <span className="text-green-400">✓</span>
-                                    95% of users report better glucose control
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
+                <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 items-center">
                     {/* Video Column */}
                     <div className="space-y-6">
                         <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-2 sm:p-4 border border-blue-200/20 overflow-hidden group transition-all duration-300 hover:shadow-blue-400/30">
